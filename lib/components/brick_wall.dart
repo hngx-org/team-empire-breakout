@@ -34,9 +34,7 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
 
   late final List<Color> _colors;
 
-  // Generate a set of colors for the bricks that spans a range of colors.
-  // This color generator creates a set of colors evenly spaced across the
-  // color spectrum.
+
   static const transparency = 1.0;
   static const saturation = 0.85;
   static const lightness = 0.5;

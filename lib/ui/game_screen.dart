@@ -31,8 +31,9 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: rwGreen,
+      backgroundColor: Colors.green,
       body: Stack(
+
         children: [
           Container(
             color: Colors.black87,
@@ -48,26 +49,27 @@ class MainGameState extends State<MainGameScreen> {
               },
             ),
           ),
-          Positioned(
-            top: 20,
-            right: 20,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'Score: $score',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          )
+          // Positioned(
+          //   top: 20,
+          //   right: 20,
+          //   child: Container(
+          //     padding: const EdgeInsets.all(8),
+          //     decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       borderRadius: BorderRadius.circular(8),
+          //     ),
+          //     child: Text(
+          //       'Score: $score',
+          //       style: TextStyle(
+          //         fontSize: 16,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
   }
 }
+

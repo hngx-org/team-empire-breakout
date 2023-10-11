@@ -36,7 +36,7 @@ class Paddle extends BodyComponent<BreakoutGame>
     final shape = PolygonShape()
       ..setAsBox(
         size.width / 2.0,
-        size.height / 2.0,
+        size.height / 1.0,
         Vector2(0.0, 0.0),
         0.0,
       );
@@ -141,7 +141,7 @@ class Paddle extends BodyComponent<BreakoutGame>
     final shape = body.fixtures.first.shape as PolygonShape;
 
     final paint = Paint()
-      ..color = const Color.fromARGB(255, 80, 80, 228)
+      ..color = const Color.fromARGB(255, 255, 255, 255)
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(

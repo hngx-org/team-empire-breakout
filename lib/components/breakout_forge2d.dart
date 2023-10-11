@@ -88,8 +88,8 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
 
     _brickWall = BrickWall(
       position: brickWallPosition,
-      rows: 8,
-      columns: 6,
+      rows: 2,
+      columns: 3,
       brickBrokenCallback: incrementScore,
     );
     await add(_brickWall);

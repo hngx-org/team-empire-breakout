@@ -44,8 +44,8 @@ class Ball extends BodyComponent<BreakoutGame> {
 
   void reset() {
     body.setTransform(position, angle);
-    body.angularVelocity = 0.0;
-    body.linearVelocity = Vector2.zero();
+    body.angularVelocity = 2.0;
+    body.linearVelocity = Vector2(20,-400);
   }
 
   @override
