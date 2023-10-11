@@ -1,10 +1,9 @@
-import 'package:flame_forge2d/forge2d_game.dart';
-import '../components/ball.dart';
+import 'package:emp_breakout/components/overlay.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 
 import '../components/breakout_forge2d.dart';
-
 
 class MainGameScreen extends StatefulWidget {
   const MainGameScreen({super.key});
@@ -15,12 +14,12 @@ class MainGameScreen extends StatefulWidget {
 
 class MainGameState extends State<MainGameScreen> {
   final rwGreen = const Color.fromARGB(255, 21, 132, 67);
-  final breakoutGame = BreakoutGame();
+  final forge2dGameWorld = BreakoutGame();
   int score = 0;
   @override
   void initState() {
     super.initState();
-    breakoutGame.brickBrokenCallback = updateScore;
+    forge2dGameWorld.brickBrokenCallback = updateScore;
   }
 
   void updateScore(int newScore) {
@@ -32,7 +31,7 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: rwGreen,
       body: Stack(
         children: [
           Container(
@@ -42,19 +41,33 @@ class MainGameState extends State<MainGameScreen> {
               vertical: 40,
             ),
             child: GameWidget(
-              game: breakoutGame,
-
+              game: forge2dGameWorld,
+              overlayBuilderMap: const {
+                'PreGame': OverlayBuilder.preGame,
+                'PostGame': OverlayBuilder.postGame,
+              },
             ),
           ),
-
+          Positioned(
+            top: 20,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Score: $score',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
