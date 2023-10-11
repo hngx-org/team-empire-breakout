@@ -89,7 +89,8 @@ Before you begin, ensure you have met the following requirements:
 
 ## App Screenshots
 <img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/92023aa2-01d5-4181-ac68-f687b141cf8f" height="600" width="300"> 
-<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/1a870394-aeaf-473c-b384-a6d7c7e93c27" height="600" width="300">
+<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/1a870394-aeaf-473c-b384-a6d7c7e93c27" height="600" width="300"> 
+<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/2e148c29-5922-40cd-bea2-99cc061d6336" height="600" width="300">
 
 
 
