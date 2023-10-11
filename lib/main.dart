@@ -1,4 +1,9 @@
+
+import 'package:emp_breakout/ui/game_screen.dart';
+import 'package:emp_breakout/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'components/ball.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+      debugShowCheckedModeBanner: false,
+      title: 'Breakout Game',
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Container(),
+      home: SplashPage()
     );
   }
 }
