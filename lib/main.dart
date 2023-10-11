@@ -1,6 +1,5 @@
+
 import 'package:emp_breakout/ui/game_screen.dart';
-import 'package:flame/game.dart';
-import 'package:flame_forge2d/forge2d_game.dart';
 import 'package:flutter/material.dart';
 
 import 'components/ball.dart';
@@ -20,8 +19,6 @@ class MyApp extends StatelessWidget {
       title: 'Breakout Game',
 
       home: MainGameScreen()
-
-
     );
   }
 }
