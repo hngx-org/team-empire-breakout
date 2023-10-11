@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) =>  MenuContent()));
+              builder: (BuildContext context) =>  MenuScreen()));
     });
   }
 
@@ -36,17 +36,17 @@ class _SplashPageState extends State<SplashPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/splash.jpeg'), // Replace with your image path
+            image: AssetImage('assets/images/background.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
           child: Column(
             children: [
               SizedBox(height:150),
-              Text('Breakout (atari)',style: TextStyle(fontFamily: 'Pacifico',fontSize: 50, color: Colors.brown)),
+              Text('Breakout (atari)',style: TextStyle(fontFamily: 'Pacifico',fontSize: 50, color: Colors.black)),
               SizedBox(height:20),
 
-              Text('Game',style: TextStyle(fontFamily: 'Pacifico',fontSize: 50, color: Colors.brown)),
+              Text('Game',style: TextStyle(fontFamily: 'Pacifico', fontSize: 50, color: Colors.black)),
 
               SizedBox(height:300),
               Padding(

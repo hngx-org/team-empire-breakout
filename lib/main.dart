@@ -1,5 +1,6 @@
 
 import 'package:emp_breakout/ui/game_screen.dart';
+import 'package:emp_breakout/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'components/ball.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Breakout Game',
 
-      home: MainGameScreen()
+      home: SplashPage()
     );
   }
 }
