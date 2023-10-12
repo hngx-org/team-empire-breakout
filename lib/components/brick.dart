@@ -1,4 +1,5 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:emp_breakout/providers/valuenotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -23,6 +24,7 @@ class Brick extends BodyComponent<BreakoutGame> with ContactCallbacks {
   void beginContact(Object other, Contact contact) {
     if (other is Ball) {
       destroy = true;
+      scoreInstance.value++;
     }
   }
 
