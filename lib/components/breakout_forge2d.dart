@@ -8,11 +8,15 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:math' as math;
 
+import '../providers/levels_provider.dart';
 import 'ball.dart';
 import 'boundary.dart';
+import 'levels.dart';
 
 enum GameState {
   initializing,
@@ -39,17 +43,11 @@ class BreakoutGame extends Forge2DGame
   void Function(int score)? brickBrokenCallback;
 
   set scoreUpdatedCallback(void Function(int score) scoreUpdatedCallback) {}
-  late AudioPool pool;
 
   int score = 0;
   @override
   Future<void> onLoad() async {
-    // background = await images.load('assets/images/background.png');
-    pool = await FlameAudio.createPool(
-      'audio1.wav',
-      minPlayers: 3,
-      maxPlayers: 4,
-    );
+
     await FlameAudio.audioCache.loadAll([
       'audio1.wav',
       'collide.wav',
@@ -136,8 +134,8 @@ class BreakoutGame extends Forge2DGame
 
     _brickWall = BrickWall(
       position: brickWallPosition,
-      rows: 2,
-      columns: 3,
+      rows: await Level.getRows(),
+      columns: await Level.getColumn(),
       brickBrokenCallback: incrementScore,
     );
     await add(_brickWall);
@@ -170,9 +168,10 @@ class BreakoutGame extends Forge2DGame
     final ballPosition = Vector2(size.x / 2.0, size.y / 2.0 + 10.0);
 
     _ball = Ball(
-      radius: 50,
+      radius: await Level.getRadius(),
       position: ballPosition,
     );
+
     await add(_ball);
 
     gameState = GameState.ready;
@@ -182,5 +181,12 @@ class BreakoutGame extends Forge2DGame
   void incrementScore() {
     score++; // Increment the score
     brickBrokenCallback?.call(score);
+  }
+
+  Future<void> nextLevel() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? level = prefs.getInt("level");
+    level = level! + 1;
+    prefs.setInt("level", level);
   }
 }

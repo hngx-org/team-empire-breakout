@@ -1,12 +1,6 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
-import 'package:emp_breakout/components/paddle.dart';
-import 'package:flame/collisions.dart';
-import 'package:flame/collisions.dart';
-import 'package:flame/collisions.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flame/extensions.dart';
@@ -51,7 +45,9 @@ class Ball extends BodyComponent<BreakoutGame> with CollisionCallbacks {
   void reset() {
     body.setTransform(position, angle);
     body.angularVelocity = 0.0;
-    body.linearVelocity = Vector2(80, 7900);
+    body.linearVelocity = Vector2(0, 0);
+    print("Current Linear Velocity: ${body.linearVelocity}");
+
   }
 
   @override
@@ -68,17 +64,5 @@ class Ball extends BodyComponent<BreakoutGame> with CollisionCallbacks {
     canvas.drawCircle(circle.position.toOffset(), radius, paint);
   }
 
-  @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
-    if (other is Paddle) {
-      FlameAudio.play('paddle-ball-collide.wav');
-    }
-  }
 
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    super.onCollisionEnd(other);
-    if (other is ScreenHitbox) {}
-  }
 }

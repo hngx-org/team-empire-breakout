@@ -1,5 +1,7 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:emp_breakout/ui/game_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OverlayBuilder {
   OverlayBuilder._();
@@ -70,16 +72,12 @@ class PostGameOverlay extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.green),
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               message,
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontFamily: "Pacifico"
-              ),
+                  color: Colors.white, fontSize: 30, fontFamily: "Pacifico"),
             ),
             const SizedBox(height: 24),
             _resetButton(context, game),
@@ -90,15 +88,27 @@ class PostGameOverlay extends StatelessWidget {
   }
 
   Widget _resetButton(BuildContext context, BreakoutGame game) {
-    return IconButton(
-      onPressed: () => game.resetGame(),
-      icon: Icon(
-        Icons.replay,
-        size: 70,
-        color: Colors.purple,
-      ),
+    return (game.gameState == GameState.won)
+        ? IconButton(
+            onPressed: () async {
+              game.nextLevel();
 
-    );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainGameScreen()));
+            },
+            icon: Icon(
+              Icons.next_plan_outlined,
+              size: 70,
+              color: Colors.purple,
+            ))
+        : IconButton(
+            onPressed: () => game.resetGame(),
+            icon: Icon(
+              Icons.replay,
+              size: 70,
+              color: Colors.purple,
+            ),
+          );
   }
 }
 
@@ -147,7 +157,6 @@ class PauseGameOverlay extends StatelessWidget {
         size: 70,
         color: Colors.purple,
       ),
-
     );
   }
 }
@@ -160,6 +169,5 @@ Widget pauseGame(BuildContext context, BreakoutGame game) {
       size: 70,
       color: Colors.purple,
     ),
-
   );
 }

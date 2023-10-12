@@ -10,7 +10,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'ball.dart';
 
 class Paddle extends BodyComponent<BreakoutGame>
-    with DragCallbacks, HasGameRef<BreakoutGame> , CollisionCallbacks {
+    with DragCallbacks, HasGameRef<BreakoutGame> , ContactCallbacks {
   final Size size;
   final BodyComponent ground;
   @override
@@ -29,6 +29,7 @@ class Paddle extends BodyComponent<BreakoutGame>
   @override
   Body createBody() {
     final bodyDef = BodyDef()
+      ..userData = this
       ..type = BodyType.dynamic
       ..position = position
       ..fixedRotation = true
@@ -159,18 +160,11 @@ class Paddle extends BodyComponent<BreakoutGame>
         ),
         paint);
   }
+
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void beginContact(Object other, Contact contact) {
     if (other is Ball) {
       FlameAudio.play('paddle-ball-collide.wav');
     }
   }
-
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    super.onCollisionEnd(other);
-    if (other is ScreenHitbox) {
-
-  }
-}}
+}
