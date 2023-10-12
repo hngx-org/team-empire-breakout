@@ -1,7 +1,9 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:emp_breakout/providers/levels_provider.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
+import 'package:provider/provider.dart';
 
 import 'brick.dart';
 
@@ -14,7 +16,6 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
   final int rows;
   final int columns;
   final double gap;
-
   void breakBrick(Brick brick) {
     bricks.remove(brick);
 
@@ -31,7 +32,7 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
   })  : position = position ?? Vector2.zero(),
         rows = rows ?? 1,
         columns = columns ?? 1,
-        gap = gap ?? 0.1;
+        gap = gap ?? 0.4;
 
   late final List<Color> _colors;
 

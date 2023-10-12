@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'game_screen.dart';
 
@@ -23,32 +24,34 @@ class _PageWithAnimatedListState extends State<LevelScreen> {
   void _loadItems() {
     // fetching data from web api, db...
     final fetchedList = [
-      AnimatedButton(context: context, content: "Level 1"),
+      AnimatedButton(context: context, content: "Level 1", level:1),
 
       SizedBox(
         height: 20,
       ),
 
-      AnimatedButton(context: context, content: "Level 2"),
+      AnimatedButton(context: context, content: "Level 2", level: 2),
 
       SizedBox(
         height: 20,
       ),
 
-      AnimatedButton(context: context, content: "Level 3"),
+      AnimatedButton(context: context, content: "Level 3", level: 3),
 
       SizedBox(
         height: 20,
       ),
 
-      AnimatedButton(context: context, content: "Level 4"),
+      AnimatedButton(context: context, content: "Level 4", level: 4),
+      SizedBox(
+        height: 20,
+      ),
+      AnimatedButton(context: context, content: "Level 5", level: 5),
 
       SizedBox(
         height: 20,
       ),
-
-      AnimatedButton(context: context, content: "Level 5"),
-
+      AnimatedButton(context: context, content: "Level 6", level: 6),
       SizedBox(
         height: 20,
       ),
@@ -174,12 +177,14 @@ class AnimatedButton extends StatelessWidget {
   const AnimatedButton({
     super.key,
     required this.content,
+    required this .level,
 
     required this.context,
   });
 
   final BuildContext context;
   final String content;
+  final int level;
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +198,9 @@ class AnimatedButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
         ),
-        onPressed: () {
+        onPressed: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setInt("level", level);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MainGameScreen()),

@@ -1,8 +1,11 @@
 import 'package:emp_breakout/components/overlay.dart';
+import 'package:emp_breakout/providers/levels_provider.dart';
 import 'package:flame/flame.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/breakout_forge2d.dart';
 
@@ -26,8 +29,10 @@ class MainGameState extends State<MainGameScreen> {
   }
 
   void updateScore(int newScore) {
-    setState(() {
+    setState(() async {
       score = newScore;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt("score", newScore);
     });
   }
 
@@ -39,36 +44,56 @@ class MainGameState extends State<MainGameScreen> {
     // final levelProvider = Provider.of<LevelProvider>(context, listen: false);
 
     return Scaffold(
-        backgroundColor: Colors.black,
-        body:
-        Stack(
-            children: [GameWidget(
-              backgroundBuilder: (context){
-                return Container(
-                  margin: EdgeInsets.only(bottom: 100),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/break.jpeg'), // Replace with the path to your image asset
-                      fit: BoxFit.cover, // You can choose how the image fits in the container
+      backgroundColor: Colors.black,
+      body:
+          Stack(
+            children: [Container(
+
+              child: GameWidget(
+                backgroundBuilder: (context){
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 100),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/water.png'), // Replace with the path to your image asset
+                        fit: BoxFit.cover, // You can choose how the image fits in the container
+                      ),
                     ),
-                  ),
-                );
-              },
-              game: breakout,
-              overlayBuilderMap: const {
-                'PreGame': OverlayBuilder.preGame,
-                'PauseGame': OverlayBuilder.pauseGame,
-                'PostGame': OverlayBuilder.postGame,
-              },
+                  );
+                },
+                game: breakout,
+                overlayBuilderMap: const {
+                  'PreGame': OverlayBuilder.preGame,
+                  'PauseGame': OverlayBuilder.pauseGame,
+                  'PostGame': OverlayBuilder.postGame,
+                },
+              ),
             ),
 
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: pauseGame(context, breakout),
+          ),
+              Positioned(
+                top: 20,
+                right: 20,
+                child: Text("$score"),
+              ),
               Positioned(
                 bottom: 20,
-                right: 20,
-                child: pauseGame(context, breakout),
+                left: 20,
+
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }, child: Text("Back"),
+
+                ),
               ),
 
-            ]
-        ));
+]
+    ));
   }
 }
+
