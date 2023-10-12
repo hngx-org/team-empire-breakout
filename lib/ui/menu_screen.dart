@@ -56,6 +56,7 @@
 //     );
 //   }
 // }
+import 'package:emp_breakout/ui/instructions_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -100,7 +101,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         ),
       ),
       SizedBox(
-        height: 20,
+        height: 40,
       ),
       AnimatedContainer(
         duration: Duration(milliseconds: 300),
@@ -122,7 +123,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         ),
       ),
       SizedBox(
-        height: 20,
+        height: 40,
       ),
       AnimatedContainer(
         duration: Duration(
@@ -135,9 +136,9 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
             primary: Colors.red,
           ),
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MainGameScreen()),
+              MaterialPageRoute(builder: (context) => InstructionScreen())
             );
           },
           child: Text('Instructions',
@@ -194,26 +195,47 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
     ),
         child: Column(
           children: [
-            SizedBox(height: 300,),
+            SizedBox(height: 200,),
             Expanded(
-              child: AnimatedList(
-                key: _listKey,
-                padding: EdgeInsets.only(top: 10),
-                initialItemCount: _listItems.length,
-                itemBuilder: (context, index, animation) {
-                  return SlideTransition(
-                    position: CurvedAnimation(
-                      curve: Curves.easeOut,
-                      parent: animation,
-                    ).drive((Tween<Offset>(
-                      begin: Offset(1, 0),
-                      end: Offset(0, 0),
-                    ))),
-                    child: _listItems[index],
-                  );
-                },
+              child: Stack(
+                children:[
+                  AnimatedList(
+                    key: _listKey,
+                    padding: EdgeInsets.only(top: 10),
+                    initialItemCount: _listItems.length,
+                    itemBuilder: (context, index, animation) {
+                      return SlideTransition(
+                        position: CurvedAnimation(
+                          curve: Curves.easeOut,
+                          parent: animation,
+                        ).drive((Tween<Offset>(
+                          begin: Offset(1, 0),
+                          end: Offset(0, 0),
+                        ))),
+                        child: _listItems[index],
+                      );
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 80,
+                      ),
+                      onPressed: () {
+                        // Add your settings button functionality here
+                      },
+                    ),
+                  ),
+
+                ]
+
               ),
+
             ),
+            SizedBox(height: 60,)
           ],
         ),
       ),
