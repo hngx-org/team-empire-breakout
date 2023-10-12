@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import 'package:emp_breakout/components/animated_button.dart';
 // import 'package:emp_breakout/ui/game_screen.dart';
 // import 'package:flutter/material.dart';
@@ -57,6 +58,9 @@
 //   }
 // }
 import 'package:emp_breakout/ui/instructions_screen.dart';
+=======
+import 'package:emp_breakout/ui/levels_screen.dart';
+>>>>>>> 30e58ad352b7615c7f1a72c59317cca9099a8d60
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +91,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         height: 100,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainGameScreen()),
             );
@@ -112,9 +116,9 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
             primary: Colors.blue,
           ),
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MainGameScreen()),
+              MaterialPageRoute(builder: (context) => LevelScreen()),
             );
           },
           child: Text('Select Level',
@@ -138,7 +142,11 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
           onPressed: () {
             Navigator.push(
               context,
+<<<<<<< HEAD
               MaterialPageRoute(builder: (context) => InstructionScreen())
+=======
+              MaterialPageRoute(builder: (context) => LevelScreen()),
+>>>>>>> 30e58ad352b7615c7f1a72c59317cca9099a8d60
             );
           },
           child: Text('Instructions',
@@ -187,15 +195,22 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-         decoration: BoxDecoration(
-      image: DecorationImage(
-      image: AssetImage('assets/images/splash.jpeg'), // Replace with your image path
-      fit: BoxFit.cover,
-    ),
-    ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/splash.jpeg'), // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           children: [
+<<<<<<< HEAD
             SizedBox(height: 200,),
+=======
+            SizedBox(
+              height: 300,
+            ),
+>>>>>>> 30e58ad352b7615c7f1a72c59317cca9099a8d60
             Expanded(
               child: Stack(
                 children:[

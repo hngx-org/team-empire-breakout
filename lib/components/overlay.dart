@@ -14,6 +14,13 @@ class OverlayBuilder {
     final message = game.gameState == GameState.won ? 'Winner!' : 'Game Over';
     return PostGameOverlay(message: message, game: game);
   }
+
+  static Widget pauseGame(BuildContext context, BreakoutGame game) {
+    assert(game.gameState == GameState.paused);
+
+    final message = game.gameState == GameState.paused ? 'Resume' : 'Pause';
+    return PauseGameOverlay(message: message, game: game);
+  }
 }
 
 class PreGameOverlay extends StatelessWidget {
@@ -21,12 +28,23 @@ class PreGameOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Tap Paddle to Begin',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 24,
+    return Padding(
+      padding: EdgeInsets.all(40.0),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(height: 2),
+            Center(
+              child: Text(
+                'Tap to begin',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -46,33 +64,102 @@ class PostGameOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            message,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.green),
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              message,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontFamily: "Pacifico"
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          _resetButton(context, game),
-        ],
+            const SizedBox(height: 24),
+            _resetButton(context, game),
+          ],
+        ),
       ),
     );
   }
 
   Widget _resetButton(BuildContext context, BreakoutGame game) {
-    return OutlinedButton.icon(
-      style: OutlinedButton.styleFrom(
-        side: const BorderSide(
-          color: Colors.blue,
-        ),
-      ),
+    return IconButton(
       onPressed: () => game.resetGame(),
-      icon: const Icon(Icons.restart_alt_outlined),
-      label: const Text('Replay'),
+      icon: Icon(
+        Icons.replay,
+        size: 70,
+        color: Colors.purple,
+      ),
+
     );
   }
+}
+
+class PauseGameOverlay extends StatelessWidget {
+  final String message;
+  final BreakoutGame game;
+
+  const PauseGameOverlay({
+    super.key,
+    required this.message,
+    required this.game,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.green),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              message,
+              style: const TextStyle(
+                fontFamily: 'Pacifico',
+                color: Colors.white,
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 24),
+            _resetButton2(context, game),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _resetButton2(BuildContext context, BreakoutGame game) {
+    return IconButton(
+      onPressed: () => game.resumeGame(),
+      icon: Icon(
+        Icons.play_circle,
+        size: 70,
+        color: Colors.purple,
+      ),
+
+    );
+  }
+}
+
+Widget pauseGame(BuildContext context, BreakoutGame game) {
+  return IconButton(
+    onPressed: () => game.pauseGame(),
+    icon: Icon(
+      Icons.pause_circle,
+      size: 70,
+      color: Colors.purple,
+    ),
+
+  );
 }

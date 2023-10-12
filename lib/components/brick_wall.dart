@@ -1,4 +1,5 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 
@@ -34,7 +35,6 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
 
   late final List<Color> _colors;
 
-
   static const transparency = 1.0;
   static const saturation = 0.85;
   static const lightness = 0.5;
@@ -68,6 +68,8 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
         for (final fixture in [...child.body.fixtures]) {
           child.body.destroyFixture(fixture);
         }
+        FlameAudio.play('collide.wav');
+
         gameRef.world.destroyBody(child.body);
         remove(child);
       }
