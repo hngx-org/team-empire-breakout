@@ -4,10 +4,12 @@ import 'dart:ui';
 import 'package:emp_breakout/components/brick_wall.dart';
 import 'package:emp_breakout/components/dead_zone.dart';
 import 'package:emp_breakout/components/paddle.dart';
-import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:emp_breakout/provider/provider.dart';
+import 'package:flame/components.dart';
 
 import 'dart:math' as math;
 
@@ -23,9 +25,9 @@ enum GameState {
   lost,
 }
 
-class BreakoutGame extends Forge2DGame
-    with TapCallbacks, HasCollisionDetection {
-  BreakoutGame() : super(gravity: Vector2.zero(), zoom: 10);
+class BreakoutGame extends Forge2DGame with TapCallbacks {
+  final ScoreNotifier scoreNotifier;
+  BreakoutGame(this.scoreNotifier) : super(gravity: Vector2.zero(), zoom: 10);
 
   late final Boundary _boundary;
   late final Ball _ball;
@@ -35,8 +37,6 @@ class BreakoutGame extends Forge2DGame
   late final Image background;
 
   GameState gameState = GameState.initializing;
-
-  void Function(int score)? brickBrokenCallback;
 
   set scoreUpdatedCallback(void Function(int score) scoreUpdatedCallback) {}
   late AudioPool pool;
@@ -135,11 +135,10 @@ class BreakoutGame extends Forge2DGame
     final brickWallPosition = Vector2(0.0, size.y * 0.075);
 
     _brickWall = BrickWall(
-      position: brickWallPosition,
-      rows: 2,
-      columns: 3,
-      brickBrokenCallback: incrementScore,
-    );
+        position: brickWallPosition,
+        rows: 8,
+        columns: 6,
+        scoreNotifier: scoreNotifier);
     await add(_brickWall);
 
     final deadZoneSize = Size(size.x, size.y * 0.1);
@@ -177,10 +176,5 @@ class BreakoutGame extends Forge2DGame
 
     gameState = GameState.ready;
     overlays.add('PreGame');
-  }
-
-  void incrementScore() {
-    score++; // Increment the score
-    brickBrokenCallback?.call(score);
   }
 }

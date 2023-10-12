@@ -1,9 +1,7 @@
-import 'package:emp_breakout/main.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
-import '../ui/game_screen.dart';
 import 'breakout_forge2d.dart';
 
 class Boundary extends BodyComponent<BreakoutGame>

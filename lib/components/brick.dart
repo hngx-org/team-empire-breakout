@@ -1,4 +1,5 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:emp_breakout/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -6,12 +7,14 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'ball.dart';
 
 class Brick extends BodyComponent<BreakoutGame> with ContactCallbacks {
+  final ScoreNotifier scoreNotifier;
   final Size size;
   @override
   final Vector2 position;
   final Color color;
 
   Brick({
+    required this.scoreNotifier,
     required this.size,
     required this.position,
     required this.color,
@@ -23,6 +26,7 @@ class Brick extends BodyComponent<BreakoutGame> with ContactCallbacks {
   void beginContact(Object other, Contact contact) {
     if (other is Ball) {
       destroy = true;
+      scoreNotifier.incrementScore();
     }
   }
 

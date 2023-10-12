@@ -1,5 +1,5 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
-import 'package:flame_audio/flame_audio.dart';
+import 'package:emp_breakout/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 
@@ -7,7 +7,7 @@ import 'brick.dart';
 
 class BrickWall extends Component with HasGameRef<BreakoutGame> {
   late List<Brick> bricks;
-  void Function()? brickBrokenCallback;
+  final ScoreNotifier scoreNotifier;
   int pointValue = 10;
   final Vector2 position;
   final Size? size;
@@ -17,17 +17,15 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
 
   void breakBrick(Brick brick) {
     bricks.remove(brick);
-
-    brickBrokenCallback?.call();
   }
 
   BrickWall({
     Vector2? position,
     this.size,
+    required this.scoreNotifier,
     int? rows,
     int? columns,
     double? gap,
-    required void Function() brickBrokenCallback,
   })  : position = position ?? Vector2.zero(),
         rows = rows ?? 1,
         columns = columns ?? 1,
@@ -35,6 +33,9 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
 
   late final List<Color> _colors;
 
+  // Generate a set of colors for the bricks that spans a range of colors.
+  // This color generator creates a set of colors evenly spaced across the
+  // color spectrum.
   static const transparency = 1.0;
   static const saturation = 0.85;
   static const lightness = 0.5;
@@ -68,8 +69,7 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
         for (final fixture in [...child.body.fixtures]) {
           child.body.destroyFixture(fixture);
         }
-        FlameAudio.play('collide.wav');
-
+        FlameAudio.play('collide.wav')
         gameRef.world.destroyBody(child.body);
         remove(child);
       }
@@ -102,10 +102,10 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
     for (var i = 0; i < rows; i++) {
       for (var j = 0; j < columns; j++) {
         await add(Brick(
-          size: brickSize,
-          position: brickPosition,
-          color: _colors[i],
-        ));
+            size: brickSize,
+            position: brickPosition,
+            color: _colors[i],
+            scoreNotifier: scoreNotifier));
         brickPosition += Vector2(brickSize.width + gap, 0.0);
       }
       brickPosition += Vector2(
