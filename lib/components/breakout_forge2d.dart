@@ -29,6 +29,7 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
   late final Paddle _paddle;
   late final DeadZone _deadZone;
   late final BrickWall _brickWall;
+  late final Image background;
 
   GameState gameState = GameState.initializing;
 
@@ -39,18 +40,18 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
   int score = 0;
   @override
   Future<void> onLoad() async {
+    // background = await images.load('assets/images/background.png');
+
     await _initializeGame();
   }
 
   @override
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
-    log('tap dowm');
     if (gameState == GameState.ready) {
       overlays.remove('PreGame');
       _ball.body.applyLinearImpulse(
           Vector2(-math.pow(10, 25).toDouble(), -math.pow(10, 25).toDouble()));
-      log('game readd');
       gameState = GameState.running;
     }
   }
@@ -80,6 +81,26 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
     resumeEngine();
   }
 
+  void pauseGame() {
+    super.pauseEngine();
+    gameState = GameState.paused;
+
+    if (gameState == GameState.paused) {
+      // gameState = GameState.paused;
+      overlays.add('PauseGame');
+    }
+  }
+
+  void resumeGame() {
+    super.resumeEngine();
+
+    if (gameState == GameState.paused) {
+      gameState = GameState.ready;
+      gameState = GameState.running;
+      overlays.remove('PauseGame');
+    }
+  }
+
   Future<void> _initializeGame() async {
     _boundary = Boundary();
     await add(_boundary);
@@ -97,7 +118,7 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
     final deadZoneSize = Size(size.x, size.y * 0.1);
     final deadZonePosition = Vector2(
       size.x / 2.0,
-      size.y - (size.y * 0.1) / 2.0,
+      size.y - ((size.y * 0.1) / 2.0 )- 80,
     );
 
     _deadZone = DeadZone(
@@ -109,7 +130,7 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
     const paddleSize = Size(80, 8);
     final paddlePosition = Vector2(
       size.x / 2.0,
-      size.y - deadZoneSize.height - paddleSize.height / 2.0,
+      size.y - (deadZoneSize.height - paddleSize.height / 2.0 + 100),
     );
 
     _paddle = Paddle(
@@ -122,7 +143,7 @@ class BreakoutGame extends Forge2DGame with TapCallbacks {
     final ballPosition = Vector2(size.x / 2.0, size.y / 2.0 + 10.0);
 
     _ball = Ball(
-      radius: 7,
+      radius: 50,
       position: ballPosition,
     );
     await add(_ball);
