@@ -148,7 +148,7 @@ class Paddle extends BodyComponent<BreakoutGame>
     final shape = body.fixtures.first.shape as PolygonShape;
 
     final paint = Paint()
-      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..color = const Color.fromARGB(255, 25, 105, 255)
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(

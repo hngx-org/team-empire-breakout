@@ -52,10 +52,11 @@ class MainGameState extends State<MainGameScreen> {
               child: GameWidget(
                 backgroundBuilder: (context){
                   return Container(
-                    margin: EdgeInsets.only(bottom: 100),
-                    decoration: const BoxDecoration(
+                    // margin: EdgeInsets.only(bottom: 100),
+                    decoration:  BoxDecoration(
+                      color: Colors.purple.withOpacity(0.7),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/water.png'), // Replace with the path to your image asset
+                        image: AssetImage('assets/images/pink2.png'), // Replace with the path to your image asset
                         fit: BoxFit.cover, // You can choose how the image fits in the container
                       ),
                     ),

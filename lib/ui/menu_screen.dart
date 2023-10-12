@@ -39,11 +39,11 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
             );
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            primary: Colors.green.withOpacity(0.7),
           ), // Set the background color
           child: Text('Start Game',
               style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
         ),
       ),
       SizedBox(
@@ -55,7 +55,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         height: 100,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
+            primary: Colors.blue.withOpacity(0.6),
           ),
           onPressed: () {
             Navigator.push(
@@ -65,7 +65,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
           },
           child: Text('Select Level',
               style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
         ),
       ),
       SizedBox(
@@ -79,21 +79,18 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         height: 100,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            primary: Colors.red.withOpacity(0.5),
           ),
           onPressed: () {
             Navigator.push(
               context,
-
-
-
               MaterialPageRoute(builder: (context) => InstructionScreen()),
 
             );
           },
           child: Text('Instructions',
               style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
         ),
       ),
     ];
@@ -137,10 +134,11 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                'assets/images/splash.jpeg'), // Replace with your image path
+                'assets/images/house2.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
