@@ -36,73 +36,39 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
+    // final levelProvider = Provider.of<LevelProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      body:
-          Stack(
-            children: [Container(
-
-              child: GameWidget(
-                backgroundBuilder: (context){
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 100),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/water.png'), // Replace with the path to your image asset
-                        fit: BoxFit.cover, // You can choose how the image fits in the container
-                      ),
+        backgroundColor: Colors.black,
+        body:
+        Stack(
+            children: [GameWidget(
+              backgroundBuilder: (context){
+                return Container(
+                  margin: EdgeInsets.only(bottom: 100),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/break.jpeg'), // Replace with the path to your image asset
+                      fit: BoxFit.cover, // You can choose how the image fits in the container
                     ),
-                  );
-                },
-                game: breakout,
-                overlayBuilderMap: const {
-                  'PreGame': OverlayBuilder.preGame,
-                  'PauseGame': OverlayBuilder.pauseGame,
-                  'PostGame': OverlayBuilder.postGame,
-                },
-              ),
+                  ),
+                );
+              },
+              game: breakout,
+              overlayBuilderMap: const {
+                'PreGame': OverlayBuilder.preGame,
+                'PauseGame': OverlayBuilder.pauseGame,
+                'PostGame': OverlayBuilder.postGame,
+              },
             ),
 
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: pauseGame(context, breakout),
-          ),
+              Positioned(
+                bottom: 20,
+                right: 20,
+                child: pauseGame(context, breakout),
+              ),
 
-    //   Positioned(
-    // bottom: 10,
-    //         child: AnimatedContainer(
-    // duration: Duration(
-    // milliseconds: 300,
-    // ),
-    // width: 200,
-    // height: 100,
-    // child: ElevatedButton(
-    // style: ElevatedButton.styleFrom(
-    // primary: Colors.red,
-    // ),
-    // onPressed: () {
-    // Navigator.pop(context);
-    //
-    // },
-    // child: Row(
-    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-    // children: [
-    //   Icon(Icons.arrow_forward_ios_outlined, size: 40, color: Colors.black,),
-    //
-    // Text('Go back',
-    // style: TextStyle(
-    // fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
-    //   SizedBox(),
-    //
-    // ],
-    // ),
-    // ),
-    // ),
-    //         )
-]
-    ));
+            ]
+        ));
   }
 }
-
