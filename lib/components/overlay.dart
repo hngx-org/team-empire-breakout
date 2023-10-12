@@ -36,16 +36,19 @@ class PreGameOverlay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: 2),
+            SizedBox(height:600),
             Center(
               child: Text(
                 'Tap to begin',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 30,
+                  fontFamily: 'Pacifico'
                 ),
               ),
             ),
+            SizedBox(height: 2),
+
           ],
         ),
       ),

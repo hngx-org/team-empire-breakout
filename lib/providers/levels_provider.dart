@@ -8,7 +8,7 @@ class LevelProvider extends ChangeNotifier{
   int _level = 1;
   int _score = 0;
   int _layers = 2;
-
+  bool _soundOn = true;
 
   void setLevel(int value){
     _level = value;
@@ -19,7 +19,13 @@ class LevelProvider extends ChangeNotifier{
     return _level;
   }
 
-
+  void setSoundOn(bool value){
+    _soundOn=value;
+    notifyListeners();
+  }
+   bool getSoundOn(){
+    return _soundOn;
+   }
   void setScore(int value){
     _score = value;
     notifyListeners();

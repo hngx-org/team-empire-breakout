@@ -192,8 +192,8 @@ class AnimatedButton extends StatelessWidget {
       duration: Duration(
         milliseconds: 300,
       ),
-      width: 100,
-      height: 100,
+      width: 70,
+      height:70,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,

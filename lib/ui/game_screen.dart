@@ -1,6 +1,7 @@
 import 'package:emp_breakout/components/overlay.dart';
 import 'package:emp_breakout/providers/levels_provider.dart';
 import 'package:flame/flame.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
@@ -41,7 +42,7 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    // final levelProvider = Provider.of<LevelProvider>(context, listen: false);
+    final soundProvider = Provider.of<LevelProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -55,7 +56,7 @@ class MainGameState extends State<MainGameScreen> {
                     margin: EdgeInsets.only(bottom: 100),
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/water.png'), // Replace with the path to your image asset
+                        image: AssetImage('assets/images/forest.jpeg'), // Replace with the path to your image asset
                         fit: BoxFit.cover, // You can choose how the image fits in the container
                       ),
                     ),
@@ -84,12 +85,36 @@ class MainGameState extends State<MainGameScreen> {
                 bottom: 20,
                 left: 20,
 
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }, child: Text("Back"),
+                child:  IconButton(
+                  onPressed: () {Navigator.pop(context);},
+                  icon: Icon(
+                    Icons.arrow_circle_left_rounded,
+                    size: 70,
+                    color: Colors.purple,
+                  ),
+                )
+              ),
+              Positioned(
+                  bottom: 20,
+                  left: 160,
 
-                ),
+                  child:  IconButton(
+                    onPressed: () {
+                      if (soundProvider.getSoundOn == true){
+                        FlameAudio.bgm.stop();
+                        soundProvider.setSoundOn(false);
+                      }else{
+                        FlameAudio.bgm.resume();
+                        soundProvider.setSoundOn(true);
+
+                      }
+                    },
+                    icon: Icon(
+                      Icons.volume_mute_rounded,
+                      size: 70,
+                      color: Colors.purple,
+                    ),
+                  )
               ),
 
 ]

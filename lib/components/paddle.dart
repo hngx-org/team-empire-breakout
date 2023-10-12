@@ -126,7 +126,7 @@ class Paddle extends BodyComponent<BreakoutGame>
     final mouseJointDef = MouseJointDef()
       ..bodyA = ground.body
       ..bodyB = body
-      ..frequencyHz = 5.0
+      ..frequencyHz = 1.0
       ..dampingRatio = 0.9
       ..collideConnected = false
       ..maxForce = 2000.0 * body.mass;
