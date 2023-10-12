@@ -1,12 +1,16 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
+import 'ball.dart';
+
 class Paddle extends BodyComponent<BreakoutGame>
-    with DragCallbacks, HasGameRef<BreakoutGame> {
+    with DragCallbacks, HasGameRef<BreakoutGame> , CollisionCallbacks {
   final Size size;
   final BodyComponent ground;
   @override
@@ -68,7 +72,7 @@ class Paddle extends BodyComponent<BreakoutGame>
       ..lowerTranslation = -travelExtent
       ..upperTranslation = travelExtent
       ..collideConnected = true;
-
+     FlameAudio.play('paddle-ball-collide.wav');
     jointDef.initialize(body, ground.body, body.worldCenter, worldAxis);
     final joint = PrismaticJoint(jointDef);
     world.createJoint(joint);
@@ -81,7 +85,7 @@ class Paddle extends BodyComponent<BreakoutGame>
       return;
     }
     dragStartPosition = event.devicePosition;
-
+    FlameAudio.play('move-paddle.wav');
     _setupDragControls();
 
     return;
@@ -114,6 +118,8 @@ class Paddle extends BodyComponent<BreakoutGame>
 
     return false;
   }
+
+
 
   void _setupDragControls() {
     final mouseJointDef = MouseJointDef()
@@ -153,4 +159,18 @@ class Paddle extends BodyComponent<BreakoutGame>
         ),
         paint);
   }
-}
+  @override
+  void onCollision(Set<Vector2> points, PositionComponent other) {
+    super.onCollision(points, other);
+    if (other is Ball) {
+      FlameAudio.play('paddle-ball-collide.wav');
+    }
+  }
+
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    super.onCollisionEnd(other);
+    if (other is ScreenHitbox) {
+
+  }
+}}

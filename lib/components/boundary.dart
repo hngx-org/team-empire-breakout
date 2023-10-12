@@ -6,7 +6,6 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import '../ui/game_screen.dart';
 import 'breakout_forge2d.dart';
 
-
 class Boundary extends BodyComponent<BreakoutGame>
     with DragCallbacks, HasGameRef<BreakoutGame> {
   Vector2? size;
@@ -15,11 +14,11 @@ class Boundary extends BodyComponent<BreakoutGame>
     assert(size == null || size!.x >= 1.0 && size!.y >= 1.0);
   }
 
-  late Vector2 arenaSize;
+  late Vector2 boundarySize;
 
   @override
   Future<void> onLoad() {
-    arenaSize = size ?? gameRef.size;
+    boundarySize = size ?? gameRef.size;
     return super.onLoad();
   }
 
@@ -29,19 +28,19 @@ class Boundary extends BodyComponent<BreakoutGame>
       ..position = Vector2(0, 0)
       ..type = BodyType.static;
 
-    final arenaBody = world.createBody(bodyDef);
+    final boundaryBody = world.createBody(bodyDef);
 
     final vertices = <Vector2>[
-      arenaSize,
-      Vector2(0, arenaSize.y),
+      boundarySize,
+      Vector2(0, boundarySize.y),
       Vector2(0, 0),
-      Vector2(arenaSize.x, 0),
+      Vector2(boundarySize.x, 0),
     ];
 
     final chain = ChainShape()..createLoop(vertices);
 
     for (var index = 0; index < chain.childCount; index++) {
-      arenaBody.createFixture(
+      boundaryBody.createFixture(
         FixtureDef(chain.childEdge(index))
           ..density = 2000.0
           ..friction = 0.0
@@ -49,6 +48,6 @@ class Boundary extends BodyComponent<BreakoutGame>
       );
     }
 
-    return arenaBody;
+    return boundaryBody;
   }
 }
