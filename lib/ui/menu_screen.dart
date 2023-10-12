@@ -1,4 +1,3 @@
-
 import 'package:emp_breakout/ui/levels_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -130,15 +129,18 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-         decoration: BoxDecoration(
-      image: DecorationImage(
-      image: AssetImage('assets/images/splash.jpeg'), // Replace with your image path
-      fit: BoxFit.cover,
-    ),
-    ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/splash.jpeg'), // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           children: [
-            SizedBox(height: 300,),
+            SizedBox(
+              height: 300,
+            ),
             Expanded(
               child: AnimatedList(
                 key: _listKey,
