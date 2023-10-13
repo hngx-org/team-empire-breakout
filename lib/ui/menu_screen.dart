@@ -33,6 +33,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
         height: 100,
         child: ElevatedButton(
           onPressed: () {
+
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainGameScreen()),
@@ -184,7 +185,7 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
               ),
 
             ),
-            SizedBox(height: 60,)
+            // SizedBox(height: 20,)
           ],
         ),
       ),

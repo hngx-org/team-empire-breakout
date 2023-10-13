@@ -7,6 +7,12 @@ class ScoreNotifier extends ValueNotifier<int> {
     value++;
     notifyListeners();
   }
+
+
+  void restScore() {
+    value=0;
+    notifyListeners();
+  }
 }
 
 ScoreNotifier scoreInstance = ScoreNotifier();

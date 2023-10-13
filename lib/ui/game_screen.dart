@@ -33,7 +33,7 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    final soundProvider = Provider.of<LevelProvider>(context, listen: false);
+    final soundProvider = Provider.of<LevelProvider>(context, );
 
     return Scaffold(
         backgroundColor: Colors.black,
@@ -92,7 +92,11 @@ class MainGameState extends State<MainGameScreen> {
               left: 20,
 
               child: IconButton(
-                onPressed: () {
+                onPressed: () async {
+                  scoreInstance.restScore();
+                  final SharedPreferences  ref =await SharedPreferences.getInstance();
+                  await ref.setInt('score',0);
+                  FlameAudio.bgm.stop();
                   Navigator.pop(context);
                 },
                 icon: Icon(
@@ -104,7 +108,7 @@ class MainGameState extends State<MainGameScreen> {
           ),
             Positioned(
               bottom: 20,
-              left: 160,
+              left: 140,
 
               child: IconButton(
                 onPressed: () {
@@ -125,3 +129,4 @@ class MainGameState extends State<MainGameScreen> {
         ]));
   }
 }
+

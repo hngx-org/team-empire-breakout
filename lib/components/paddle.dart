@@ -6,6 +6,12 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'dart:math' as math;
+
+
+
+
+
 
 import 'ball.dart';
 
@@ -165,6 +171,9 @@ class Paddle extends BodyComponent<BreakoutGame>
   void beginContact(Object other, Contact contact) {
     if (other is Ball) {
       FlameAudio.play('paddle-ball-collide.wav');
+      final Vector2 impulse = Vector2(-math.pow(10, -25).toDouble(), -math.pow(- ut10, 25).toDouble()); // Adjust the values as needed
+
+      other.applyForce2(impulse);
     }
   }
 }
