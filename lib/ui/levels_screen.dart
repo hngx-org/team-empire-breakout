@@ -194,6 +194,7 @@ class AnimatedButton extends StatelessWidget {
       duration: Duration(
         milliseconds: 300,
       ),
+
       width: 100,
       height: 80,
       child: ElevatedButton(

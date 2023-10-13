@@ -2,6 +2,7 @@ import 'package:emp_breakout/components/overlay.dart';
 import 'package:emp_breakout/providers/levels_provider.dart';
 import 'package:emp_breakout/providers/valuenotifier.dart';
 import 'package:flame/flame.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
@@ -32,7 +33,7 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    // final levelProvider = Provider.of<LevelProvider>(context, listen: false);
+    final soundProvider = Provider.of<LevelProvider>(context, listen: false);
 
     return Scaffold(
         backgroundColor: Colors.black,
@@ -87,14 +88,39 @@ class MainGameState extends State<MainGameScreen> {
                     ));
               }),
           Positioned(
-            bottom: 20,
-            left: 20,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text("Back"),
-            ),
+              bottom: 20,
+              left: 20,
+
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_circle_left_rounded,
+                  size: 70,
+                  color: Colors.purple,
+                ),
+              )
+          ),
+            Positioned(
+              bottom: 20,
+              left: 160,
+
+              child: IconButton(
+                onPressed: () {
+                  if (soundProvider.soundPlaying == false) {
+                    FlameAudio.bgm.stop();
+                    // soundProvider.setSoundOn();
+                  } else {
+                    FlameAudio.bgm.resume();
+                  }
+                },
+                icon: Icon(
+                  Icons.volume_mute_rounded,
+                  size: 70,
+                  color: Colors.purple,
+                ),
+              )
           ),
         ]));
   }
