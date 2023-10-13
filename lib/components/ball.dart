@@ -46,6 +46,7 @@ class Ball extends BodyComponent<BreakoutGame> with CollisionCallbacks {
     body.setTransform(position, angle);
     body.angularVelocity = 0.0;
     body.linearVelocity = Vector2(250, 250)*8000;
+    body.linearVelocity = Vector2(2, 1000) * 5000;
     print("Current Linear Velocity: ${body.linearVelocity}");
 
   }

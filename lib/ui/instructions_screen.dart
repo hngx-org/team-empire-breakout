@@ -27,7 +27,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         height: 100,
         child: Text('Welcome to Breakout!',
             style: TextStyle(
-                fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                fontFamily: 'Pacifico', fontSize: 30, color: Colors.black)),
       ),
       SizedBox(
         height: 10,
@@ -38,7 +38,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         height: 100,
         child: Text('Swipe left or right to move the paddle.',
             style: TextStyle(
-                fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                fontFamily: 'Pacifico', fontSize: 30, color: Colors.black)),
       ),
       SizedBox(
         height: 10,
@@ -49,7 +49,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         height: 100,
         child: Text('Avoid letting the ball hit the bottom.',
             style: TextStyle(
-                fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                fontFamily: 'Pacifico', fontSize: 30, color: Colors.black)),
       ),
       SizedBox(
         height: 10,
@@ -60,7 +60,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         height: 100,
         child: Text('Collect power-ups for special abilities.',
             style: TextStyle(
-                fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                fontFamily: 'Pacifico', fontSize: 30, color: Colors.black)),
       ),
       SizedBox(
         height: 10,
@@ -71,7 +71,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         height: 100,
         child: Text('Have fun and enjoy the game!',
             style: TextStyle(
-                fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                fontFamily: 'Pacifico', fontSize: 30, color: Colors.black)),
       ),
     ];
 
@@ -124,7 +124,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                'assets/images/background.png'), // Replace with your image path
+                'assets/images/magic.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -137,26 +137,37 @@ class _InstructionScreenState extends State<InstructionScreen> {
               ),
               Expanded(
                 child:
-                  AnimatedList(
-                    key: _listKey,
-                    padding: EdgeInsets.only(top: 10),
-                    initialItemCount: _listItems.length,
-                    itemBuilder: (context, index, animation) {
-                      return SlideTransition(
-                        position: CurvedAnimation(
-                          curve: Curves.easeOut,
-                          parent: animation,
-                        ).drive((Tween<Offset>(
-                          begin: Offset(1, 0),
-                          end: Offset(0, 0),
-                        ))),
-                        child: _listItems[index],
-                      );
-                    },
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+
+                      color: Colors.white.withOpacity(0.7)
+                    ),
+                    child: AnimatedList(
+                      key: _listKey,
+                      padding: EdgeInsets.only(top: 10),
+                      initialItemCount: _listItems.length,
+                      itemBuilder: (context, index, animation) {
+                        return SlideTransition(
+                          position: CurvedAnimation(
+                            curve: Curves.easeOut,
+                            parent: animation,
+                          ).drive((Tween<Offset>(
+                            begin: Offset(1, 0),
+                            end: Offset(0, 0),
+                          ))),
+                          child: _listItems[index],
+                        );
+                      },
+                    ),
                   ),
 
 
                             ),
+              SizedBox(
+                height: 10,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.brown,
@@ -169,7 +180,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
                 },
                 child: Text('Start Game',
                     style: TextStyle(
-                        fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                        fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
               ),
 
               SizedBox(height: 70,),

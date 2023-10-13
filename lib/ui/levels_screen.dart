@@ -97,9 +97,11 @@ class _PageWithAnimatedListState extends State<LevelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.all(20),
+
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/splash.jpeg'), // Replace with your image path
+            image: AssetImage('assets/images/house.png'), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -148,10 +150,10 @@ class AnimatedButtonBack extends StatelessWidget {
         milliseconds: 300,
       ),
       width: 100,
-      height: 100,
+      height: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.red,
+          primary: Colors.red.withOpacity(0.7),
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -160,10 +162,10 @@ class AnimatedButtonBack extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(Icons.arrow_back_ios, size: 40, color: Colors.black,),
+            Icon(Icons.arrow_back_ios, size: 40, color: Colors.white,),
             Text('Go Back',
                 style: TextStyle(
-                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
+                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
             SizedBox()
           ],
         ),
@@ -192,11 +194,13 @@ class AnimatedButton extends StatelessWidget {
       duration: Duration(
         milliseconds: 300,
       ),
-      width: 70,
-      height:70,
+
+      width: 100,
+      height: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.blue,
+          primary: Colors.transparent.withOpacity(0.5),
+
         ),
         onPressed: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -213,8 +217,8 @@ class AnimatedButton extends StatelessWidget {
 
             Text('$content',
                 style: TextStyle(
-                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
-            Icon(Icons.arrow_forward_ios_outlined, size: 40, color: Colors.black,),
+                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
+            Icon(Icons.arrow_forward_ios_outlined, size: 40, color: Colors.white,),
 
           ],
         ),
