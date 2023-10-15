@@ -5,8 +5,9 @@ class Level {
   static int rows = 0;
   static double radius = 20;
   static int column = 0;
+  static int ball = 1;
 
-  static Future<int> getRows() async {
+  static Future<int> getRows()  async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int? level = prefs.getInt("level");
     switch (level) {
@@ -38,23 +39,23 @@ class Level {
     int? level = prefs.getInt("level");
     switch (level) {
       case 1:
-        radius = 30;
+        radius = 10;
         break;
 
       case 2:
-        radius = 25;
+        radius = 5;
         break;
 
       case 3:
-        radius = 20;
+        radius = 5;
         break;
       case 4:
-        radius = 15;
+        radius = 5;
         break;
       case 5:
-        radius = 10;
+        radius = 5;
       case 6:
-        radius = 9;
+        radius = 5;
         break;
     }
     return radius;
@@ -84,5 +85,31 @@ class Level {
         break;
     }
     return column;
+  }
+  static Future<int> getBalls() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? level = prefs.getInt("level");
+    switch (level) {
+      case 1:
+        ball = 1;
+        break;
+
+      case 2:
+        ball = 1;
+        break;
+
+      case 3:
+        ball = 1;
+        break;
+      case 4:
+        ball = 2;
+        break;
+      case 5:
+        ball  = 2;
+      case 6:
+        ball = 2;
+        break;
+    }
+    return ball;
   }
 }
