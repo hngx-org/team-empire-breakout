@@ -1,11 +1,11 @@
-
-
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:flame/collisions.dart';
+import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flame/extensions.dart';
 
-class Ball extends BodyComponent<BreakoutGame> {
+class Ball extends BodyComponent<BreakoutGame> with CollisionCallbacks {
   @override
   final Vector2 position;
   final double radius;
@@ -41,11 +41,20 @@ class Ball extends BodyComponent<BreakoutGame> {
     ball.createFixture(fixtureDef);
     return ball;
   }
+  void applyForce2(Vector2 impulse){
+    // final Vector2 currentVelocity = body.linearVelocity;
+    // currentVelocity.normalize();
+    // final Vector2 force = currentVelocity * 3;
+    body.applyLinearImpulse(impulse);
+  }
 
   void reset() {
     body.setTransform(position, angle);
-    body.angularVelocity = 2.0;
-    body.linearVelocity = Vector2(20,-400);
+    body.angularVelocity = 0.0;
+    body.linearVelocity = Vector2(250, 250)*8000;
+    body.linearVelocity = Vector2(2, 1000) *5000;
+    // print("Current Linear Velocity: ${body.linearVelocity}");
+
   }
 
   @override
@@ -61,4 +70,6 @@ class Ball extends BodyComponent<BreakoutGame> {
 
     canvas.drawCircle(circle.position.toOffset(), radius, paint);
   }
+
+
 }

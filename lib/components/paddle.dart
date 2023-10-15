@@ -1,12 +1,22 @@
 import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'dart:math' as math;
+
+
+
+
+
+
+import 'ball.dart';
 
 class Paddle extends BodyComponent<BreakoutGame>
-    with DragCallbacks, HasGameRef<BreakoutGame> {
+    with DragCallbacks, HasGameRef<BreakoutGame> , ContactCallbacks {
   final Size size;
   final BodyComponent ground;
   @override
@@ -25,6 +35,7 @@ class Paddle extends BodyComponent<BreakoutGame>
   @override
   Body createBody() {
     final bodyDef = BodyDef()
+      ..userData = this
       ..type = BodyType.dynamic
       ..position = position
       ..fixedRotation = true
@@ -68,7 +79,7 @@ class Paddle extends BodyComponent<BreakoutGame>
       ..lowerTranslation = -travelExtent
       ..upperTranslation = travelExtent
       ..collideConnected = true;
-
+     FlameAudio.play('paddle-ball-collide.wav');
     jointDef.initialize(body, ground.body, body.worldCenter, worldAxis);
     final joint = PrismaticJoint(jointDef);
     world.createJoint(joint);
@@ -81,7 +92,7 @@ class Paddle extends BodyComponent<BreakoutGame>
       return;
     }
     dragStartPosition = event.devicePosition;
-
+    FlameAudio.play('move-paddle.wav');
     _setupDragControls();
 
     return;
@@ -115,11 +126,13 @@ class Paddle extends BodyComponent<BreakoutGame>
     return false;
   }
 
+
+
   void _setupDragControls() {
     final mouseJointDef = MouseJointDef()
       ..bodyA = ground.body
       ..bodyB = body
-      ..frequencyHz = 5.0
+      ..frequencyHz = 1.0
       ..dampingRatio = 0.9
       ..collideConnected = false
       ..maxForce = 2000.0 * body.mass;
@@ -141,7 +154,7 @@ class Paddle extends BodyComponent<BreakoutGame>
     final shape = body.fixtures.first.shape as PolygonShape;
 
     final paint = Paint()
-      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..color = const Color.fromARGB(255, 25, 105, 255)
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(
@@ -152,5 +165,15 @@ class Paddle extends BodyComponent<BreakoutGame>
           shape.vertices[2].y,
         ),
         paint);
+  }
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    if (other is Ball) {
+      FlameAudio.play('paddle-ball-collide.wav');
+      final Vector2 impulse = Vector2(-math.pow(10, -25).toDouble(), -math.pow(- ut10, 25).toDouble()); // Adjust the values as needed
+
+      other.applyForce2(impulse);
+    }
   }
 }
