@@ -111,12 +111,12 @@ class BreakoutGame extends FlameGame
     prefs.setInt("level", level);
   }
 
-  Future<void> resetBall() async {
-    _ball = Ball(Level.radius);
+  Future<void> resetBall(int index) async {
+    Ball _ball = Ball(Level.radius);
     gameState = GameState.running;
 
     _ball.position
-      ..x = size.x / 2 - _ball.size.x / 2
+      ..x = size.x / index - _ball.size.x / index
       ..y = size.y * kBallStartYRatio;
     await add(_ball);
   }
@@ -213,10 +213,10 @@ class BreakoutGame extends FlameGame
     scoreInstance.restScore();
 
     // int i;
-    // int balls = await Level.getBalls();
-    // for(i = 0; i <= balls; i++){
-    await resetBall();
-    // }
+    int balls = await Level.getBalls();
+    for(int i = 1; i < balls + 1; i++){
+    await resetBall(i);
+    }
     gameState = GameState.ready;
     // overlays.add('PreGame');
 
@@ -239,11 +239,11 @@ class BreakoutGame extends FlameGame
     // await resetBlocks();
     // await resetBall();
     await countdown();
-    // int balls = await Level.getBalls();
-    // for(int i = 0; i <= balls; i++){
-    //  print(">>>>>ball $i");
-    await resetBall();
-    // }
+    int balls = await Level.getBalls();
+    for(int i = 1; i < balls + 1; i++){
+     print(">>>>>ball $i");
+    await resetBall(i);
+    }
     FlameAudio.bgm.play('constant.wav');
   }
 
@@ -300,12 +300,12 @@ class BreakoutGame extends FlameGame
     if (isGameOver) {
       await resetBlocks();
       failedCount = kGameTryCount;
-      await resetBall();
+      await resetBall(2);
     }
     if (gameState == GameState.initializing) {
       await resetBlocks();
       failedCount = kGameTryCount;
-      await resetBall();
+      await resetBall(2);
     }
   }
 }
