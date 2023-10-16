@@ -1,3 +1,4 @@
+import 'package:emp_breakout/providers/levels_provider.dart';
 import 'package:flutter/material.dart';
 
 class ScoreNotifier extends ValueNotifier<int> {
@@ -16,3 +17,7 @@ class ScoreNotifier extends ValueNotifier<int> {
 }
 
 ScoreNotifier scoreInstance = ScoreNotifier();
+
+
+
+

@@ -1,14 +1,16 @@
-import 'package:emp_breakout/components/breakout_forge2d.dart';
-import 'package:emp_breakout/ui/game_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../ui/game_screen.dart';
+import 'breakout_forge2d.dart';
+
 class OverlayBuilder {
   OverlayBuilder._();
-
-  static Widget preGame(BuildContext context, BreakoutGame game) {
-    return const PreGameOverlay();
-  }
+  //
+  // static Widget preGame(BuildContext context, BreakoutGame game) {
+  //   return const PreGameOverlay();
+  // }
 
   static Widget postGame(BuildContext context, BreakoutGame game) {
     assert(game.gameState == GameState.lost || game.gameState == GameState.won);
@@ -41,9 +43,9 @@ class PreGameOverlay extends StatelessWidget {
               child: Text(
                 'Tap to begin',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontFamily: 'Pacifico'
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontFamily: 'Pacifico'
                 ),
               ),
             ),
@@ -93,25 +95,31 @@ class PostGameOverlay extends StatelessWidget {
   Widget _resetButton(BuildContext context, BreakoutGame game) {
     return (game.gameState == GameState.won)
         ? IconButton(
-            onPressed: () async {
-              game.nextLevel();
+        onPressed: () async {
+          game.nextLevel();
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainGameScreen()));
 
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainGameScreen()));
-            },
-            icon: Icon(
-              Icons.next_plan_outlined,
-              size: 70,
-              color: Colors.purple,
-            ))
+
+        },
+        icon: Icon(
+          Icons.next_plan_outlined,
+          size: 70,
+          color: Colors.purple,
+        ))
         : IconButton(
-            onPressed: () => game.resetGame(),
-            icon: Icon(
-              Icons.replay,
-              size: 70,
-              color: Colors.purple,
-            ),
-          );
+      onPressed: () {
+        game.resetGame();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainGameScreen()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => MainGameScreen()));
+
+      },
+      icon: Icon(
+        Icons.replay,
+        size: 70,
+        color: Colors.purple,
+      ),
+    );
   }
 }
 

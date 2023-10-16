@@ -1,50 +1,47 @@
-import 'package:emp_breakout/components/breakout_forge2d.dart';
+import 'dart:async';
+
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
-import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/material.dart';
+import 'package:flame/palette.dart';
 
 import 'ball.dart';
+import 'breakout_forge2d.dart';
 
-class DeadZone extends BodyComponent<BreakoutGame>
-    with ContactCallbacks, HasGameRef<BreakoutGame> {
-  final Size size;
-  @override
-  final Vector2 position;
+class DeadZone extends RectangleComponent
+    with HasGameRef<BreakoutGame>, CollisionCallbacks {
+  final Paint redPaint = Paint()..color.red;
 
-  DeadZone({
-    required this.size,
-    required this.position,
-  });
+  DeadZone(position, size) {
+    this.position = position;
+    width = size.width;
+    height = size.height;
 
-  @override
-  bool get renderBody => false;
 
-  @override
-  Body createBody() {
-    final bodyDef = BodyDef()
-      ..type = BodyType.static
-      ..userData = this
-      ..position = position;
-
-    final zoneBody = world.createBody(bodyDef);
-
-    final shape = PolygonShape()
-      ..setAsBox(
-        size.width / 2.0,
-        size.height / 2.0,
-        Vector2.zero(),
-        0.0,
-      );
-
-    zoneBody.createFixture(FixtureDef(shape)..isSensor = true);
-
-    return zoneBody;
   }
-
   @override
-  void beginContact(Object other, Contact contact) {
+  FutureOr<void> onLoad() {
+    final deadZoneHitbox = RectangleHitbox(
+      size: size,
+    );
+
+    add(deadZoneHitbox);
+    return super.onLoad();
+  }
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+
     if (other is Ball) {
-      gameRef.gameState = GameState.lost;
+      // gameRef.gameState = GameState.lost;
+
     }
   }
+
+
+
+
+
 }
+

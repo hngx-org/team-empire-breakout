@@ -1,7 +1,9 @@
 
+
 import 'package:emp_breakout/ui/instructions_screen.dart';
 
 import 'package:emp_breakout/ui/levels_screen.dart';
+import 'package:emp_breakout/ui/settings_screen.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -175,6 +177,9 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
                         size: 80,
                       ),
                       onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SettingScreen()));
                         // Add your settings button functionality here
                       },
                     ),

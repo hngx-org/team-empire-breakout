@@ -1,6 +1,4 @@
-import 'package:emp_breakout/components/overlay.dart';
-import 'package:emp_breakout/providers/levels_provider.dart';
-import 'package:emp_breakout/providers/valuenotifier.dart';
+
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 
@@ -10,6 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/breakout_forge2d.dart';
+import '../components/overlay.dart';
+import '../providers/levels_provider.dart';
+import '../providers/valuenotifier.dart';
 
 class MainGameScreen extends StatefulWidget {
   const MainGameScreen({super.key});
@@ -21,25 +22,26 @@ class MainGameScreen extends StatefulWidget {
 class MainGameState extends State<MainGameScreen> {
   final rwGreen = const Color.fromARGB(255, 21, 132, 67);
   final breakout = BreakoutGame();
-
-  // void updateScore(int newScore) {
-  //   setState(() async {
-  //     score = newScore;
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     await prefs.setInt("score", newScore);
-  //   });
-  // }
+  int score = 0;
+  void updateScore(int newScore) {
+    setState(() async {
+      score = newScore;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt("score", newScore);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    final soundProvider = Provider.of<LevelProvider>(context, );
+    final soundProvider = Provider.of<LevelProvider>(context );
 
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(children: [
           Container(
             child: GameWidget(
+
               backgroundBuilder: (context) {
                 return Container(
                   // margin: EdgeInsets.only(bottom: 100),
@@ -55,7 +57,6 @@ class MainGameState extends State<MainGameScreen> {
               },
               game: breakout,
               overlayBuilderMap: const {
-                'PreGame': OverlayBuilder.preGame,
                 'PauseGame': OverlayBuilder.pauseGame,
                 'PostGame': OverlayBuilder.postGame,
               },
@@ -94,7 +95,7 @@ class MainGameState extends State<MainGameScreen> {
               child: IconButton(
                 onPressed: () async {
                   scoreInstance.restScore();
-                  final SharedPreferences  ref =await SharedPreferences.getInstance();
+                  final SharedPreferences  ref = await SharedPreferences.getInstance();
                   await ref.setInt('score',0);
                   FlameAudio.bgm.stop();
                   Navigator.pop(context);
@@ -106,7 +107,7 @@ class MainGameState extends State<MainGameScreen> {
                 ),
               )
           ),
-            Positioned(
+          Positioned(
               bottom: 20,
               left: 140,
 
