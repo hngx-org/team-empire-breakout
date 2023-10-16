@@ -88,11 +88,15 @@ Before you begin, ensure you have met the following requirements:
 2. Follow the on-screen instructions to register or log in and start using the app.
 
 ## App Screenshots
-<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/92023aa2-01d5-4181-ac68-f687b141cf8f" height="600" width="300"> 
-<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/1a870394-aeaf-473c-b384-a6d7c7e93c27" height="600" width="300"> 
-<img src ="https://github.com/hngx-org/team-empire-breakout/assets/57020210/2e148c29-5922-40cd-bea2-99cc061d6336" height="600" width="300">
 
-
+<img width="1440" alt="Screenshot 2023-10-16 at 17 19 21" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/7d56ab2d-5a93-48a1-a441-6049e5c4e6e3">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 18 25" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/4e68ba54-2f16-4e01-af51-5944c5a732de">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 18 20" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/14b2603d-9c3f-4f22-95fd-7a5e6a54447e">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 19 19" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/83aad67c-8346-48d1-a611-df90c5e6117e">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 19 01" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/fbaeea5b-4bed-431d-bdfc-28ff148f9a5d">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 18 46" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/de865eba-8c93-4712-bdac-a41a324530be">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 18 37" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/abcb6e51-b380-4502-a39c-b8454a832657">
+<img width="1440" alt="Screenshot 2023-10-16 at 17 18 30" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/bf0177ab-a395-462a-9c04-114d55a7f7c3">
 
 
 
