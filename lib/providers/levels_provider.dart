@@ -1,10 +1,11 @@
 import 'dart:core';
 
+import 'package:emp_breakout/ui/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LevelProvider extends ChangeNotifier{
-
+ GameLevel _difficulty = GameLevel.easy;
   int _level = 1;
   int _score = 0;
   int _layers = 2;
@@ -16,6 +17,15 @@ class LevelProvider extends ChangeNotifier{
     _level = value;
     notifyListeners();
   }
+ GameLevel? getDifficultyLevel(){
+   return _difficulty;
+ }
+
+ GameLevel? setDifficultyLevel(GameLevel value){
+   _difficulty = value;
+   notifyListeners();
+   return null;
+ }
 
   int getLevel(){
     return _level;

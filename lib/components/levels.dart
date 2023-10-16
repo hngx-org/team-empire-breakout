@@ -1,9 +1,13 @@
+import 'package:emp_breakout/providers/levelnotifier.dart';
+import 'package:emp_breakout/providers/levels_provider.dart';
+import 'package:emp_breakout/ui/settings_screen.dart';
+import 'package:flame/game.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Level {
   // Level(_);
   static int rows = 0;
-  static double radius = 20;
+  static double radius = 10;
   static int column = 0;
   static int ball = 1;
 
@@ -91,15 +95,26 @@ class Level {
     int? level = prefs.getInt("level");
     switch (level) {
       case 1:
-        ball = 1;
+        if (levelInstance.value==GameLevel.easy){
+          ball = 1;
+        }else{
+        ball = 2;
+        }
         break;
 
       case 2:
-        ball = 1;
-        break;
+        if (levelInstance.value==GameLevel.easy){
+          ball = 1;
+        }else{
+          ball = 2;
+        }   break;
 
       case 3:
-        ball = 1;
+        if (levelInstance.value==GameLevel.easy){
+          ball = 1;
+        }else{
+          ball = 2;
+        }
         break;
       case 4:
         ball = 2;

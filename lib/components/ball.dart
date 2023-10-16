@@ -111,7 +111,7 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
         }
         if (point.x == screenHitBoxRect.right && !isCollidedScreenHitboxX) {
           velocity.x = -velocity.x;
-          isCollidedScreenHitboxX = true;
+          // isCollidedScreenHitboxX = true;
         }
         if (point.y == screenHitBoxRect.top && !isCollidedScreenHitboxY) {
           velocity.y = -velocity.y;
