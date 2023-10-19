@@ -1,5 +1,3 @@
-
-
 import 'package:emp_breakout/ui/instructions_screen.dart';
 
 import 'package:emp_breakout/ui/levels_screen.dart';
@@ -29,71 +27,78 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
   void _loadItems() {
     // fetching data from web api, db...
     final fetchedList = [
-      AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: 100,
-        height: 100,
-        child: ElevatedButton(
-          onPressed: () {
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MainGameScreen()),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Colors.green.withOpacity(0.7),
-          ), // Set the background color
-          child: Text('Start Game',
-              style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          width: 60,
+          height: 60,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainGameScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.green.withOpacity(0.7),
+            ), // Set the background color
+            child: Text('Start Game',
+                style: TextStyle(
+                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
+          ),
         ),
       ),
       SizedBox(
-        height: 40,
+        height: 150,
       ),
-      AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: 100,
-        height: 100,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.blue.withOpacity(0.6),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          width: 60,
+          height: 60,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue.withOpacity(0.6),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LevelScreen()),
+              );
+            },
+            child: Text('Select Level',
+                style: TextStyle(
+                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LevelScreen()),
-            );
-          },
-          child: Text('Select Level',
-              style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
         ),
       ),
       SizedBox(
-        height: 40,
+        height: 140,
       ),
-      AnimatedContainer(
-        duration: Duration(
-          milliseconds: 300,
-        ),
-        width: 100,
-        height: 100,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.red.withOpacity(0.5),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50),
+        child: AnimatedContainer(
+          duration: Duration(
+            milliseconds: 300,
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InstructionScreen()),
-
-            );
-          },
-          child: Text('Instructions',
-              style: TextStyle(
-                  fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
+          width: 60,
+          height: 60,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red.withOpacity(0.5),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => InstructionScreen()),
+              );
+            },
+            child: Text('Instructions',
+                style: TextStyle(
+                    fontFamily: 'Pacifico', fontSize: 25, color: Colors.white)),
+          ),
         ),
       ),
     ];
@@ -137,58 +142,58 @@ class _PageWithAnimatedListState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        // padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                'assets/images/house2.png'), // Replace with your image path
-            fit: BoxFit.cover,
+                'assets/images/images5.jpeg'), // Replace with your image path
+            fit: BoxFit.fill,
           ),
         ),
         child: Column(
           children: [
-            SizedBox(height: 200,),
+            SizedBox(
+              height: 200,
+            ),
             Expanded(
-              child: Stack(
-                children:[
-                  AnimatedList(
-                    key: _listKey,
-                    padding: EdgeInsets.only(top: 10),
-                    initialItemCount: _listItems.length,
-                    itemBuilder: (context, index, animation) {
-                      return SlideTransition(
-                        position: CurvedAnimation(
-                          curve: Curves.easeOut,
-                          parent: animation,
-                        ).drive((Tween<Offset>(
-                          begin: Offset(1, 0),
-                          end: Offset(0, 0),
-                        ))),
-                        child: _listItems[index],
-                      );
+              child: Stack(children: [
+                AnimatedList(
+                  key: _listKey,
+                  padding: EdgeInsets.only(top: 10),
+                  initialItemCount: _listItems.length,
+                  itemBuilder: (context, index, animation) {
+                    return SlideTransition(
+                      position: CurvedAnimation(
+                        curve: Curves.easeOut,
+                        parent: animation,
+                      ).drive((Tween<Offset>(
+                        begin: Offset(1, 0),
+                        end: Offset(0, 0),
+                      ))),
+                      child: _listItems[index],
+                    );
+                  },
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 80,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingScreen()));
+                      // Add your settings button functionality here
                     },
                   ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 80,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SettingScreen()));
-                        // Add your settings button functionality here
-                      },
-                    ),
-                  ),
-
-                ]
-
-              ),
-
+                ),
+              ]),
             ),
             // SizedBox(height: 20,)
           ],

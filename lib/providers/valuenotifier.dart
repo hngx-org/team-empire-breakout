@@ -1,4 +1,5 @@
 import 'package:emp_breakout/providers/levels_provider.dart';
+import 'package:flame/timer.dart';
 import 'package:flutter/material.dart';
 
 class ScoreNotifier extends ValueNotifier<int> {
@@ -9,15 +10,10 @@ class ScoreNotifier extends ValueNotifier<int> {
     notifyListeners();
   }
 
-
   void restScore() {
-    value=0;
+    value = 0;
     notifyListeners();
   }
 }
 
 ScoreNotifier scoreInstance = ScoreNotifier();
-
-
-
-

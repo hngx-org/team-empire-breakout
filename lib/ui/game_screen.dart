@@ -1,4 +1,4 @@
-
+import 'package:emp_breakout/components/timer.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 
@@ -34,21 +34,20 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    final soundProvider = Provider.of<LevelProvider>(context );
+    final soundProvider = Provider.of<LevelProvider>(context);
 
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(children: [
           Container(
             child: GameWidget(
-
               backgroundBuilder: (context) {
                 return Container(
                   // margin: EdgeInsets.only(bottom: 100),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                          'assets/images/pinkwall.png'), // Replace with the path to your image asset
+                          'assets/images/atari5.jpeg'), // Replace with the path to your image asset
                       fit: BoxFit
                           .cover, // You can choose how the image fits in the container
                     ),
@@ -89,14 +88,25 @@ class MainGameState extends State<MainGameScreen> {
                     ));
               }),
           Positioned(
+              top: 55,
+              left: 20,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TimeScreen(breakout: breakout),
+              )),
+          Positioned(
               bottom: 20,
               left: 20,
-
               child: IconButton(
                 onPressed: () async {
                   scoreInstance.restScore();
-                  final SharedPreferences  ref = await SharedPreferences.getInstance();
-                  await ref.setInt('score',0);
+                  final SharedPreferences ref =
+                      await SharedPreferences.getInstance();
+                  await ref.setInt('score', 0);
                   FlameAudio.bgm.stop();
                   Navigator.pop(context);
                 },
@@ -105,12 +115,10 @@ class MainGameState extends State<MainGameScreen> {
                   size: 70,
                   color: Colors.purple,
                 ),
-              )
-          ),
+              )),
           Positioned(
               bottom: 20,
               left: 140,
-
               child: IconButton(
                 onPressed: () {
                   if (soundProvider.soundPlaying == false) {
@@ -125,9 +133,7 @@ class MainGameState extends State<MainGameScreen> {
                   size: 70,
                   color: Colors.purple,
                 ),
-              )
-          ),
+              )),
         ]));
   }
 }
-

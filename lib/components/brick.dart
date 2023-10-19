@@ -10,10 +10,10 @@ import 'ball.dart';
 class Brick extends RectangleComponent with CollisionCallbacks {
   Brick({required this.blockSize, required this.onBlockRemove})
       : super(
-    size: blockSize,
-    paint: Paint()
-      ..color = kBlockColors[Random().nextInt(kBlockColors.length)],
-  );
+          size: blockSize,
+          paint: Paint()
+            ..color = kBlockColors[Random().nextInt(kBlockColors.length)],
+        );
 
   final Vector2 blockSize;
   final Future<void> Function() onBlockRemove;
@@ -30,10 +30,10 @@ class Brick extends RectangleComponent with CollisionCallbacks {
   }
 
   @override
-  void onCollisionStart(
-      Set<Vector2> intersectionPoints,
-      PositionComponent other,
-      ) {
+  void isionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
     if (other is Ball) {
       removeFromParent();
     }

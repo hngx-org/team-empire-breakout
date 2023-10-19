@@ -84,7 +84,10 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum GameLevel { easy, hard,}
+enum GameLevel {
+  easy,
+  hard,
+}
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -92,10 +95,10 @@ class SettingScreen extends StatefulWidget {
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
+
 class _SettingScreenState extends State<SettingScreen> {
   bool isSwitched = false;
   GameLevel selectedLevel = GameLevel.easy;
-
 
   @override
   void initState() {
@@ -131,125 +134,154 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text('Settings', style: TextStyle(
-            fontFamily: 'Pacifico', fontSize: 25, color: Colors.black))),
-      ),
+      // appBar: AppBar(
+
+      //   title: Center(
+      //       child: Text('Settings',
+      //           style: TextStyle(
+      //               fontFamily: 'Pacifico',
+      //               fontSize: 25,
+      //               color: Colors.black))),
+      // ),
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                  'assets/images/house2.png'), // Replace with your image path
-              fit: BoxFit.cover,
-            ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/breakout2.jpeg'), // Replace with your image path
+            fit: BoxFit.cover,
           ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  // color: Colors.purpleAccent,
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Text(
+                "Settings",
+                style: TextStyle(fontSize: 40, color: Colors.white),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    // color: Colors.purpleAccent,
                     color: Colors.white.withOpacity(0.7),
 
                     borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          isSwitched ? 'Switch OFF Music' : 'Switch ON Music',
+                          style: TextStyle(
+                              fontFamily: 'Pacifico',
+                              fontSize: 25,
+                              color: Colors.brown),
+                        ),
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                              saveSwitchState();
+                              if (isSwitched == false) {
+                                FlameAudio.bgm.stop();
+                              } else {
+                                FlameAudio.bgm.resume();
+                              }
+                            });
+                          },
+                          activeTrackColor: Colors.lightGreen,
+                          activeColor: Colors.purpleAccent,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.7),
+
+                    // color: Colors.purpleAccent,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        isSwitched ? 'Switch OFF Music' : 'Switch ON Music',
-                        style: TextStyle(
-                            fontFamily: 'Pacifico', fontSize: 25, color: Colors.brown),
+                    children: [
+                      ListTile(
+                        title: Text(
+                          'Select Game Mode',
+                          style: TextStyle(
+                              fontFamily: 'Pacifico',
+                              fontSize: 25,
+                              color: Colors.brown),
+                        ),
                       ),
-                      Switch(
-                        value: isSwitched,
-                        onChanged: (value) {
+                      DropdownButton<GameLevel>(
+                        value: selectedLevel,
+                        items: GameLevel.values.map((level) {
+                          return DropdownMenuItem<GameLevel>(
+                            value: level,
+                            child: Text(
+                              level.toString().split('.').last,
+                              style: TextStyle(
+                                  fontFamily: 'Pacifico',
+                                  fontSize: 25,
+                                  color: Colors.black),
+                            ), // Display the level name
+                          );
+                        }).toList(),
+                        onChanged: (GameLevel? value) {
                           setState(() {
-                            isSwitched = value;
-                            saveSwitchState();
-                            if (isSwitched == false) {
-                              FlameAudio.bgm.stop();
-                            } else {
-                              FlameAudio.bgm.resume();
-                            }
+                            selectedLevel = value!;
+                            saveSelectedLevel(selectedLevel);
+                            levelInstance.value = selectedLevel;
                           });
                         },
-                        activeTrackColor: Colors.lightGreen,
-                        activeColor: Colors.purpleAccent,
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.7),
-
-                  // color: Colors.purpleAccent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                 child: Column(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                   children: [
-                     ListTile(
-                      title: Text('Select Game Mode', style: TextStyle(
-                          fontFamily: 'Pacifico', fontSize: 25, color: Colors.brown),),
-                                   ),
-                     DropdownButton<GameLevel>(
-                       value: selectedLevel,
-                       items: GameLevel.values.map((level) {
-                         return DropdownMenuItem<GameLevel>(
-                           value: level,
-                           child: Text(level.toString().split('.').last, style: TextStyle(
-                               fontFamily: 'Pacifico', fontSize: 25, color: Colors.black),), // Display the level name
-                         );
-                       }).toList(),
-                       onChanged: (GameLevel? value) {
-                         setState(() {
-                           selectedLevel = value!;
-                           saveSelectedLevel(selectedLevel);
-                           levelInstance.value=selectedLevel;
-                         });
-                       },
-                     ),
-                   ],
-                 ),
+              SizedBox(
+                height: 50,
               ),
-            ),
-
-           SizedBox(height: 50,),
-            InkWell(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: Container(
-                width: 150,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-
-                    Icon(Icons.arrow_back_ios_outlined, size: 40, color: Colors.black,),
-                    Text('Go back',
-                        style: TextStyle(
-                            fontFamily: 'Pacifico', fontSize: 25, color: Colors.black)),
-
-                  ],
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.arrow_back_ios_outlined,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                      Text(' Back',
+                          style: TextStyle(
+                              fontFamily: 'Pacifico',
+                              fontSize: 25,
+                              color: Colors.black)),
+                    ],
+                  ),
                 ),
               ),
-            ),
-
-          ],
+            ],
+          ),
         ),
       ),
     );
