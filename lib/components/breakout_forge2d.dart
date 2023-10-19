@@ -116,8 +116,8 @@ class BreakoutGame extends FlameGame
     gameState = GameState.running;
 
     _ball.position
-      ..x = size.x / index - _ball.size.x / index
-      ..y = size.y * kBallStartYRatio;
+      ..x = size.x / 2
+      ..y = size.y / 2;
     await add(_ball);
   }
 
@@ -132,8 +132,8 @@ class BreakoutGame extends FlameGame
         (size.x - kBlocksStartXPosition * 2 - kBlockPadding * rows) / rows;
 
     final sizeY = (size.y * kBlocksHeightRatio -
-            kBlocksStartYPosition -
-            kBlockPadding * (cols - 1)) /
+        kBlocksStartYPosition -
+        kBlockPadding * (cols - 1)) /
         cols;
 
     final blocks = List<Brick>.generate(cols * rows, (int index) {
@@ -215,7 +215,7 @@ class BreakoutGame extends FlameGame
     // int i;
     int balls = await Level.getBalls();
     for(int i = 1; i < balls + 1; i++){
-    await resetBall(i);
+      await resetBall(i);
     }
     gameState = GameState.ready;
     // overlays.add('PreGame');
@@ -241,8 +241,8 @@ class BreakoutGame extends FlameGame
     await countdown();
     int balls = await Level.getBalls();
     for(int i = 1; i < balls + 1; i++){
-     print(">>>>>ball $i");
-    await resetBall(i);
+      print(">>>>>ball $i");
+      await resetBall(i);
     }
     FlameAudio.bgm.play('constant.wav');
   }

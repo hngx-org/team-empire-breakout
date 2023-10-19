@@ -30,7 +30,7 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
     velocity = Vector2(vx, vy);
   }
   late Vector2 velocity;
-
+  late final _hitbox;
   bool isCollidedScreenHitboxX = false;
   bool isCollidedScreenHitboxY = false;
 
@@ -45,9 +45,9 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
 
   @override
   Future<void> onLoad() async {
-    final hitbox = CircleHitbox(radius: radius);
+    _hitbox = CircleHitbox(radius: radius);
 
-    await add(hitbox);
+    await add(_hitbox);
 
     return super.onLoad();
   }
@@ -55,6 +55,29 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
   @override
   void update(double dt) {
     position += velocity * dt;
+    final screenSize = gameRef.size;
+    final playerSize = _hitbox.size;
+
+    // Calculate the min and max positions for both X and Y axes
+    final minX = playerSize.x / 2;
+    final maxX = screenSize.x - playerSize.x / 2;
+    final minY = playerSize.y / 2;
+    final maxY = screenSize.y - playerSize.y / 2;
+
+    // Clamp the player's position within the screen boundaries
+    position
+      ..x = position.x.clamp(minX, maxX).toDouble()
+      ..y = position.y.clamp(minY, maxY).toDouble();
+    if (position.x <= minX || position.x >= maxX) {
+      // Reverse the horizontal velocity to make the ball bounce off
+      velocity.x = -velocity.x;
+    }
+
+// Check if the ball hits the Y-axis clamp boundaries
+    if (position.y <= minY || position.y >= maxY) {
+      // Reverse the vertical velocity to make the ball bounce off
+      velocity.y = -velocity.y;
+    }
     super.update(dt);
   }
   Future<void> resetBall() async {
@@ -62,7 +85,7 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
 
     position
       ..x = size.x / 2
-      ..y = size.y /2;
+      ..y = size.y / 2;
 
   }
   @override
@@ -81,21 +104,21 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
       final blockRect = other.toAbsoluteRect();
       FlameAudio.play('collide.wav');
 
-          scoreInstance.incrementScore();
-          // for (final point in intersectionPoints) {
-          //   // if (point.x == brickHitbox.left ) {
-          //   //   velocity.x = -velocity.x;
-          //   // }
-          //   // if (point.x == brickHitbox.right ) {
-          //   //   velocity.x = -velocity.x;
-          //   //
-          //   // }
-          //   // if (point.y == brickHitbox.top ) {
-          //   //   velocity.y = -velocity.y;
-          //   // }
-          //   if (point.y == brickHitbox.bottom)  {
-          //     velocity.y = -velocity.y;
-          //   }
+      scoreInstance.incrementScore();
+      // for (final point in intersectionPoints) {
+      //   // if (point.x == brickHitbox.left ) {
+      //   //   velocity.x = -velocity.x;
+      //   // }
+      //   // if (point.x == brickHitbox.right ) {
+      //   //   velocity.x = -velocity.x;
+      //   //
+      //   // }
+      //   // if (point.y == brickHitbox.top ) {
+      //   //   velocity.y = -velocity.y;
+      //   // }
+      //   if (point.y == brickHitbox.bottom)  {
+      //     velocity.y = -velocity.y;
+      //   }
 
       updateBallTrajectory(collisionPoint, blockRect);
     }
@@ -109,6 +132,7 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
     if (other is ScreenHitbox) {
       final screenHitBox = other.toAbsoluteRect();
       FlameAudio.play('paddle-ball-collide.wav');
+
 
       updateBallTrajectory(collisionPoint, screenHitBox);
     }
