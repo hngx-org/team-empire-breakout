@@ -88,15 +88,11 @@ Before you begin, ensure you have met the following requirements:
 2. Follow the on-screen instructions to register or log in and start using the app.
 
 ## App Screenshots
+<img width="1440" alt="Screenshot 2023-10-20 at 11 34 39" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/fb58a11d-7fdb-4713-ba1b-f9914fc2874e">
 
-<img width="1440" alt="Screenshot 2023-10-16 at 17 19 21" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/7d56ab2d-5a93-48a1-a441-6049e5c4e6e3">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 18 25" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/4e68ba54-2f16-4e01-af51-5944c5a732de">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 18 20" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/14b2603d-9c3f-4f22-95fd-7a5e6a54447e">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 19 19" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/83aad67c-8346-48d1-a611-df90c5e6117e">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 19 01" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/fbaeea5b-4bed-431d-bdfc-28ff148f9a5d">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 18 46" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/de865eba-8c93-4712-bdac-a41a324530be">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 18 37" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/abcb6e51-b380-4502-a39c-b8454a832657">
-<img width="1440" alt="Screenshot 2023-10-16 at 17 18 30" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/bf0177ab-a395-462a-9c04-114d55a7f7c3">
+<img width="1440" alt="Screenshot 2023-10-20 at 11 46 34" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/fbdeb4c7-7b97-4787-8aeb-4f8064b9b329">
+<img width="1440" alt="Screenshot 2023-10-20 at 11 34 48" src="https://github.com/hngx-org/team-empire-breakout/assets/49102713/f3658db0-7cff-4fb4-99ac-b07f15e5818c">
+
 
 
 
