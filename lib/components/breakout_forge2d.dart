@@ -113,8 +113,9 @@ class BreakoutGame extends FlameGame
   }
 
   Future<void> resetBall(int index) async {
-    Ball _ball = Ball(Level.radius);
+    Ball _ball = Ball();
     gameState = GameState.running;
+    _ball.size = Vector2(40, 40);
 
     _ball.position
       ..x = size.x / 2
@@ -142,6 +143,7 @@ class BreakoutGame extends FlameGame
         blockSize: Vector2(sizeX, sizeY),
         onBlockRemove: onBlockRemove,
       );
+      block.size = Vector2(sizeX, sizeY);
 
       final indexX = index % rows;
       final indexY = index ~/ rows;

@@ -7,12 +7,13 @@ import 'package:flame/components.dart';
 import '../../constants/constants.dart';
 import 'ball.dart';
 
-class Brick extends RectangleComponent with CollisionCallbacks {
+class Brick extends SpriteComponent with CollisionCallbacks {
   Brick({required this.blockSize, required this.onBlockRemove})
       : super(
-    size: blockSize,
-    paint: Paint()
-      ..color = kBlockColors[Random().nextInt(kBlockColors.length)],
+
+    // size: blockSize,
+    // paint: Paint()
+    //   ..color = kBlockColors[Random().nextInt(kBlockColors.length)],
   );
 
   final Vector2 blockSize;
@@ -20,6 +21,8 @@ class Brick extends RectangleComponent with CollisionCallbacks {
 
   @override
   Future<void>? onLoad() async {
+    sprite = await Sprite.load('red_brick_sprite.png');
+
     final blockHitbox = RectangleHitbox(
       size: size,
     );

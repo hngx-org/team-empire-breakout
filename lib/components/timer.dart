@@ -81,6 +81,7 @@ class TimeNotifier extends ValueNotifier<int> {
   }
 
   void _updateTimer(Timer timer) {
+
     if (_remainingTime > 0) {
       _remainingTime--;
       value = _remainingTime;
@@ -97,6 +98,11 @@ class TimeNotifier extends ValueNotifier<int> {
   void resetZero() {
     value = 0;
   }
+  void endGame() {
+    if (value == 0){
+      gameState = GameState.lost;
+    }
+  }
 
   Future<void> resetTimer() async {
     value = await Level.getTime();
@@ -106,6 +112,7 @@ class TimeNotifier extends ValueNotifier<int> {
     if (_remainingTime > seconds) {
       _remainingTime -= seconds;
       value = _remainingTime;
+      endGame();
     }
   }
 }
