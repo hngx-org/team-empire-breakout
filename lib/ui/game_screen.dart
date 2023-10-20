@@ -140,7 +140,7 @@ class MainGameState extends State<MainGameScreen> {
           //     )),
           Positioned(
               bottom: 20,
-              left: 140,
+              left: (MediaQuery.of(context).size.width/2)-36,
               child: IconButton(
                 onPressed: () {
                   if (soundProvider.soundPlaying == false) {
