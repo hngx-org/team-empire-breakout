@@ -120,24 +120,24 @@ class MainGameState extends State<MainGameScreen> {
                   color: Colors.purple,
                 ),
               )),
-          Positioned(
-              bottom: 20,
-              right: 20,
-              child: IconButton(
-                onPressed: () async {
-                  scoreInstance.restScore();
-                  final SharedPreferences ref =
-                      await SharedPreferences.getInstance();
-                  await ref.setInt('score', 0);
-                  FlameAudio.bgm.stop();
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_circle_left_rounded,
-                  size: 70,
-                  color: Colors.purple,
-                ),
-              )),
+          // Positioned(
+          //     bottom: 20,
+          //     right: 20,
+          //     child: IconButton(
+          //       onPressed: () async {
+          //         scoreInstance.restScore();
+          //         final SharedPreferences ref =
+          //             await SharedPreferences.getInstance();
+          //         await ref.setInt('score', 0);
+          //         FlameAudio.bgm.stop();
+          //         Navigator.pop(context);
+          //       },
+          //       icon: Icon(
+          //         Icons.arrow_circle_left_rounded,
+          //         size: 70,
+          //         color: Colors.purple,
+          //       ),
+          //     )),
           Positioned(
               bottom: 20,
               left: 140,
