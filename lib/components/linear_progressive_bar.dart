@@ -45,7 +45,7 @@ class _LinearProgressWidgetState extends State<LinearProgressWidget> with Ticker
           ),
         ),
       ),
-        Center(child: Text("Loading......",  style: TextStyle(color:Colors.white,fontFamily: 'Pacifico',fontSize: 26, fontWeight: FontWeight.bold),))
+        Center(child: Text("Loading......",  style: TextStyle(color:Colors.black,fontFamily: 'Pacifico',fontSize: 26, fontWeight: FontWeight.bold),))
       ]
     );
   }
