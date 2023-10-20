@@ -86,6 +86,7 @@ class BreakoutGame extends FlameGame
     FlameAudio.bgm.pause();
     if (gameState == GameState.paused) {
       // gameState = GameState.paused;
+      timeInstance.cancelTimer();
       overlays.add('PauseGame');
     }
   }
@@ -99,6 +100,7 @@ class BreakoutGame extends FlameGame
     FlameAudio.bgm.resume();
 
     if (gameState == GameState.paused) {
+      timeInstance.startTimer(timeInstance.value);
       gameState = GameState.ready;
       gameState = GameState.running;
       overlays.remove('PauseGame');

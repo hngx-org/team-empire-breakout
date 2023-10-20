@@ -109,11 +109,10 @@ class Ball extends SpriteComponent
       Brick o = other;
       if (o.index % 9 == 0){
         // scoreInstance.incrementScore(5);
-        timeInstance.increaseTimer(5);
+        timeInstance.increaseTimer(4);
 
       }else{
-        timeInstance.increaseTimer(1);
-
+        timeInstance.increaseTimer(0);
       }
       scoreInstance.incrementScore(1);
 

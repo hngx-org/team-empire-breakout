@@ -41,13 +41,17 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           children: [
             SizedBox(height: 150),
-            Text('Breakout (atari)',
-                style: TextStyle(
-                    fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
+            Center(
+              child: Text('Breakout (atari)',
+                  style: TextStyle(
+                      fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
+            ),
             SizedBox(height: 20),
-            Text('Game',
-                style: TextStyle(
-                    fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
+            Center(
+              child: Text('Game',
+                  style: TextStyle(
+                      fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
+            ),
             SizedBox(height: 300),
             Padding(
               padding: const EdgeInsets.all(20.0),
