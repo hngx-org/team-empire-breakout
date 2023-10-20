@@ -1,4 +1,4 @@
-
+import 'package:emp_breakout/components/timer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,19 +38,15 @@ class PreGameOverlay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height:600),
+            SizedBox(height: 600),
             Center(
               child: Text(
                 'Tap to begin',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontFamily: 'Pacifico'
-                ),
+                    color: Colors.white, fontSize: 30, fontFamily: 'Pacifico'),
               ),
             ),
             SizedBox(height: 2),
-
           ],
         ),
       ),
@@ -75,7 +71,8 @@ class PostGameOverlay extends StatelessWidget {
         height: 200,
         width: 200,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.green.withOpacity(0.7)),
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.green.withOpacity(0.7)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -95,31 +92,32 @@ class PostGameOverlay extends StatelessWidget {
   Widget _resetButton(BuildContext context, BreakoutGame game) {
     return (game.gameState == GameState.won)
         ? IconButton(
-        onPressed: () async {
-          game.nextLevel();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainGameScreen()));
+            onPressed: () async {
+              game.nextLevel();
 
-
-        },
-        icon: Icon(
-          Icons.next_plan_outlined,
-          size: 70,
-          color: Colors.purple,
-        ))
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => MainGameScreen()));
+            },
+            icon: Icon(
+              Icons.next_plan_outlined,
+              size: 70,
+              color: Colors.purple,
+            ))
         : IconButton(
-      onPressed: () {
-        game.resetGame();
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainGameScreen()));
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => MainGameScreen()));
-
-      },
-      icon: Icon(
-        Icons.replay,
-        size: 70,
-        color: Colors.purple,
-      ),
-    );
+            onPressed: () {
+              game.resetGame();
+              timeInstance.resetTimer();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => MainGameScreen()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => MainGameScreen()));
+            },
+            icon: Icon(
+              Icons.replay,
+              size: 70,
+              color: Colors.purple,
+            ),
+          );
   }
 }
 
@@ -140,7 +138,8 @@ class PauseGameOverlay extends StatelessWidget {
         height: 200,
         width: 200,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.green.withOpacity(0.7)),
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.green.withOpacity(0.7)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
