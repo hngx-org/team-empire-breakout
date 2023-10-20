@@ -15,16 +15,17 @@ import '../providers/valuenotifier.dart';
 import 'breakout_forge2d.dart';
 import 'brick.dart';
 import 'dead_zone.dart';
+import 'levels.dart';
 import 'paddle.dart';
 
-class Ball extends CircleComponent
+class Ball extends SpriteComponent
     with HasGameRef<BreakoutGame>, CollisionCallbacks {
-  final double radius;
+  // final double radius;
 
   Ball(
-    this.radius,
+    // this.radius,
   ) {
-    radius = radius;
+    // radius = radius;
     paint = Paint()..color = kBallColor;
     final vx = -kBallSpeed * cos(spawnAngle * kRad);
     final vy = -kBallSpeed * sin(spawnAngle * kRad);
@@ -46,7 +47,9 @@ class Ball extends CircleComponent
 
   @override
   Future<void> onLoad() async {
-    _hitbox = CircleHitbox(radius: radius);
+    sprite = await Sprite.load('ball_pink_sprite.png');
+
+    _hitbox = CircleHitbox(radius: 20);
 
     await add(_hitbox);
 

@@ -39,32 +39,32 @@ class Level {
     return rows;
   }
 
-  static Future<double> getRadius() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    int? level = prefs.getInt("level");
-    switch (level) {
-      case 1:
-        radius = 10;
-        break;
-
-      case 2:
-        radius = 5;
-        break;
-
-      case 3:
-        radius = 5;
-        break;
-      case 4:
-        radius = 5;
-        break;
-      case 5:
-        radius = 5;
-      case 6:
-        radius = 5;
-        break;
-    }
-    return radius;
-  }
+  // static Future<double> getRadius() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   int? level = prefs.getInt("level");
+  //   switch (level) {
+  //     case 1:
+  //       radius = 10;
+  //       break;
+  //
+  //     case 2:
+  //       radius = 5;
+  //       break;
+  //
+  //     case 3:
+  //       radius = 5;
+  //       break;
+  //     case 4:
+  //       radius = 5;
+  //       break;
+  //     case 5:
+  //       radius = 5;
+  //     case 6:
+  //       radius = 5;
+  //       break;
+  //   }
+  //   return radius;
+  // }
 
   static Future<int> getColumn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
