@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class ScoreNotifier extends ValueNotifier<int> {
   ScoreNotifier() : super(0);
 
-  void incrementScore() {
-    value++;
+  void incrementScore(int i) {
+    value = value + i;
     notifyListeners();
   }
 

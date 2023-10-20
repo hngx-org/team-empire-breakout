@@ -134,12 +134,13 @@ class BreakoutGame extends FlameGame
         (size.x - kBlocksStartXPosition * 2 - kBlockPadding * rows) / rows;
 
     final sizeY = (size.y * kBlocksHeightRatio -
-            kBlocksStartYPosition -
-            kBlockPadding * (cols - 1)) /
+        kBlocksStartYPosition -
+        kBlockPadding * (cols - 1)) /
         cols;
 
     final blocks = List<Brick>.generate(cols * rows, (int index) {
       final block = Brick(
+        index: index,
         blockSize: Vector2(sizeX, sizeY),
         onBlockRemove: onBlockRemove,
       );
