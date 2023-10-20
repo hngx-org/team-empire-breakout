@@ -115,6 +115,12 @@ class TimeNotifier extends ValueNotifier<int> {
       endGame();
     }
   }
+  void increaseTimer(int seconds) {
+
+      _remainingTime += seconds;
+      value = _remainingTime;
+
+  }
 }
 
 TimeNotifier timeInstance = TimeNotifier();
