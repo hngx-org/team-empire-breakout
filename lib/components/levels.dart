@@ -10,8 +10,9 @@ class Level {
   static double radius = 10;
   static int column = 0;
   static int ball = 1;
+  static int time_l = 60;
 
-  static Future<int> getRows()  async {
+  static Future<int> getRows() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int? level = prefs.getInt("level");
     switch (level) {
@@ -90,29 +91,31 @@ class Level {
     }
     return column;
   }
+
   static Future<int> getBalls() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int? level = prefs.getInt("level");
     switch (level) {
       case 1:
-        if (levelInstance.value==GameLevel.easy){
+        if (levelInstance.value == GameLevel.easy) {
           ball = 1;
-        }else{
-        ball = 2;
+        } else {
+          ball = 2;
         }
         break;
 
       case 2:
-        if (levelInstance.value==GameLevel.easy){
+        if (levelInstance.value == GameLevel.easy) {
           ball = 1;
-        }else{
+        } else {
           ball = 2;
-        }   break;
+        }
+        break;
 
       case 3:
-        if (levelInstance.value==GameLevel.easy){
+        if (levelInstance.value == GameLevel.easy) {
           ball = 1;
-        }else{
+        } else {
           ball = 2;
         }
         break;
@@ -120,11 +123,50 @@ class Level {
         ball = 2;
         break;
       case 5:
-        ball  = 2;
+        ball = 2;
       case 6:
         ball = 3;
         break;
     }
     return ball;
+  }
+
+  static Future<int> getTime() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? level = prefs.getInt("level");
+    switch (level) {
+      case 1:
+        if (levelInstance.value == GameLevel.easy) {
+          time_l = 20;
+        } else {
+          time_l = 20;
+        }
+        break;
+
+      case 2:
+        if (levelInstance.value == GameLevel.easy) {
+          time_l = 20;
+        } else {
+          time_l = 25;
+        }
+        break;
+
+      case 3:
+        if (levelInstance.value == GameLevel.easy) {
+          time_l = 25;
+        } else {
+          time_l = 30;
+        }
+        break;
+      case 4:
+        time_l = 40;
+        break;
+      case 5:
+        time_l = 35;
+      case 6:
+        time_l = 40;
+        break;
+    }
+    return time_l;
   }
 }

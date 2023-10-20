@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:emp_breakout/components/paddle.dart';
+import 'package:emp_breakout/components/timer.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
@@ -132,8 +133,8 @@ class BreakoutGame extends FlameGame
         (size.x - kBlocksStartXPosition * 2 - kBlockPadding * rows) / rows;
 
     final sizeY = (size.y * kBlocksHeightRatio -
-        kBlocksStartYPosition -
-        kBlockPadding * (cols - 1)) /
+            kBlocksStartYPosition -
+            kBlockPadding * (cols - 1)) /
         cols;
 
     final blocks = List<Brick>.generate(cols * rows, (int index) {
@@ -214,7 +215,7 @@ class BreakoutGame extends FlameGame
 
     // int i;
     int balls = await Level.getBalls();
-    for(int i = 1; i < balls + 1; i++){
+    for (int i = 1; i < balls + 1; i++) {
       await resetBall(i);
     }
     gameState = GameState.ready;
@@ -240,7 +241,7 @@ class BreakoutGame extends FlameGame
     // await resetBall();
     await countdown();
     int balls = await Level.getBalls();
-    for(int i = 1; i < balls + 1; i++){
+    for (int i = 1; i < balls + 1; i++) {
       print(">>>>>ball $i");
       await resetBall(i);
     }
@@ -272,6 +273,7 @@ class BreakoutGame extends FlameGame
 
       await Future<void>.delayed(const Duration(seconds: 1));
     }
+    timeInstance.startTimer(await Level.getTime());
   }
 
   @override

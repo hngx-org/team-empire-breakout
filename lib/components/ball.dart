@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
-
+import 'package:emp_breakout/components/timer.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/collisions.dart';
@@ -17,16 +17,17 @@ import 'brick.dart';
 import 'dead_zone.dart';
 import 'paddle.dart';
 
-class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCallbacks{
+class Ball extends CircleComponent
+    with HasGameRef<BreakoutGame>, CollisionCallbacks {
   final double radius;
 
   Ball(
-      this.radius,
-      ) {
+    this.radius,
+  ) {
     radius = radius;
     paint = Paint()..color = kBallColor;
-    final vx = - kBallSpeed * cos(spawnAngle * kRad);
-    final vy = - kBallSpeed * sin(spawnAngle * kRad);
+    final vx = -kBallSpeed * cos(spawnAngle * kRad);
+    final vy = -kBallSpeed * sin(spawnAngle * kRad);
     velocity = Vector2(vx, vy);
   }
   late Vector2 velocity;
@@ -39,7 +40,7 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
   double get spawnAngle {
     final random = Random().nextDouble();
     final spawnAngle =
-    lerpDouble(kBallMinSpawnAngle, kBallMaxSpawnAngle, random)!;
+        lerpDouble(kBallMinSpawnAngle, kBallMaxSpawnAngle, random)!;
     return spawnAngle;
   }
 
@@ -80,14 +81,13 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
     }
     super.update(dt);
   }
+
   Future<void> resetBall() async {
-
-
     position
       ..x = size.x / 2
       ..y = size.y / 2;
-
   }
+
   @override
   Future<void> onRemove() async {
     // await onBallRemove();
@@ -96,9 +96,9 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
 
   @override
   void onCollisionStart(
-      Set<Vector2> intersectionPoints,
-      PositionComponent other,
-      ) {
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
     final collisionPoint = intersectionPoints.first;
     if (other is Brick) {
       final blockRect = other.toAbsoluteRect();
@@ -133,16 +133,15 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
       final screenHitBox = other.toAbsoluteRect();
       FlameAudio.play('paddle-ball-collide.wav');
 
-
       updateBallTrajectory(collisionPoint, screenHitBox);
     }
 
-
     if (other is DeadZone) {
       gameRef.gameState = GameState.lost;
+      timeInstance.cancelTimer();
       final deadZoneBoxRect = other.toAbsoluteRect();
       for (final point in intersectionPoints) {
-        if (point.x == deadZoneBoxRect.top ) {
+        if (point.x == deadZoneBoxRect.top) {
           // velocity.x = -velocity.x;
           // isCollidedScreenHitboxX = true;
 
@@ -150,9 +149,9 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
           // game.gameState = GameState.lost;
           // gameRef.gameState = GameState.lost;
           FlameAudio.play('audio1.wav');
-        }}
+        }
+      }
     }
-
 
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -226,9 +225,9 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
   }
 
   void updateBallTrajectory(
-      Vector2 collisionPoint,
-      Rect rect,
-      ) {
+    Vector2 collisionPoint,
+    Rect rect,
+  ) {
     final isLeftHit = collisionPoint.x == rect.left;
     final isRightHit = collisionPoint.x == rect.right;
     final isTopHit = collisionPoint.y == rect.top;
@@ -242,17 +241,17 @@ class Ball extends CircleComponent with  HasGameRef<BreakoutGame>,  CollisionCal
         print("hiiiii right hit down");
         velocity.x -= kBallNudgeSpeed;
         return;
-      }else{
+      } else {
         print("hiiiii right hit up");
         velocity.x += kBallNudgeSpeed;
       }
 
-      if (isLeftHit  && velocity.x < 0) {
+      if (isLeftHit && velocity.x < 0) {
         velocity.x += kBallNudgeSpeed;
         print("hiiiii left hit up");
 
         return;
-      }else{
+      } else {
         velocity.x -= kBallNudgeSpeed;
         print("hiiiii left hit down");
       }

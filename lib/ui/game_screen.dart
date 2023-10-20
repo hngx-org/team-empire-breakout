@@ -1,4 +1,4 @@
-
+import 'package:emp_breakout/components/timer.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 
@@ -34,14 +34,13 @@ class MainGameState extends State<MainGameScreen> {
   @override
   Widget build(BuildContext context) {
     // Flame.images.load('background.png');
-    final soundProvider = Provider.of<LevelProvider>(context );
+    final soundProvider = Provider.of<LevelProvider>(context);
 
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(children: [
           Container(
             child: GameWidget(
-
               backgroundBuilder: (context) {
                 return Container(
                   // margin: EdgeInsets.only(bottom: 100),
@@ -88,15 +87,48 @@ class MainGameState extends State<MainGameScreen> {
                       ),
                     ));
               }),
+          ValueListenableBuilder(
+              valueListenable: timeInstance,
+              builder: (context, value, _) {
+                return Positioned(
+                    top: 50,
+                    left: 20,
+                    child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: TimeScreen(breakout: breakout)));
+              }),
           Positioned(
               bottom: 20,
               left: 20,
-
               child: IconButton(
                 onPressed: () async {
                   scoreInstance.restScore();
-                  final SharedPreferences  ref = await SharedPreferences.getInstance();
-                  await ref.setInt('score',0);
+                  final SharedPreferences ref =
+                      await SharedPreferences.getInstance();
+                  await ref.setInt('score', 0);
+                  FlameAudio.bgm.stop();
+                  timeInstance.resetZero();
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_circle_left_rounded,
+                  size: 70,
+                  color: Colors.purple,
+                ),
+              )),
+          Positioned(
+              bottom: 20,
+              right: 20,
+              child: IconButton(
+                onPressed: () async {
+                  scoreInstance.restScore();
+                  final SharedPreferences ref =
+                      await SharedPreferences.getInstance();
+                  await ref.setInt('score', 0);
                   FlameAudio.bgm.stop();
                   Navigator.pop(context);
                 },
@@ -105,12 +137,10 @@ class MainGameState extends State<MainGameScreen> {
                   size: 70,
                   color: Colors.purple,
                 ),
-              )
-          ),
+              )),
           Positioned(
               bottom: 20,
               left: 140,
-
               child: IconButton(
                 onPressed: () {
                   if (soundProvider.soundPlaying == false) {
@@ -125,9 +155,7 @@ class MainGameState extends State<MainGameScreen> {
                   size: 70,
                   color: Colors.purple,
                 ),
-              )
-          ),
+              )),
         ]));
   }
 }
-
