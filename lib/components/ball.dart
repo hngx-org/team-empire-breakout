@@ -106,8 +106,17 @@ class Ball extends SpriteComponent
     if (other is Brick) {
       final blockRect = other.toAbsoluteRect();
       FlameAudio.play('collide.wav');
+      Brick o = other;
+      if (o.index % 9 == 0){
+        // scoreInstance.incrementScore(5);
+        timeInstance.increaseTimer(5);
 
-      scoreInstance.incrementScore();
+      }else{
+        timeInstance.increaseTimer(1);
+
+      }
+      scoreInstance.incrementScore(1);
+
       // for (final point in intersectionPoints) {
       //   // if (point.x == brickHitbox.left ) {
       //   //   velocity.x = -velocity.x;
