@@ -137,34 +137,34 @@ class Level {
     switch (level) {
       case 1:
         if (levelInstance.value == GameLevel.easy) {
-          time_l = 20;
+          time_l = 30;
         } else {
-          time_l = 20;
+          time_l = 25;
         }
         break;
 
       case 2:
         if (levelInstance.value == GameLevel.easy) {
-          time_l = 20;
+          time_l = 35;
         } else {
-          time_l = 25;
+          time_l = 30;
         }
         break;
 
       case 3:
         if (levelInstance.value == GameLevel.easy) {
-          time_l = 25;
+          time_l = 40;
         } else {
           time_l = 30;
         }
         break;
       case 4:
-        time_l = 40;
+        time_l = 45;
         break;
       case 5:
-        time_l = 35;
+        time_l = 50;
       case 6:
-        time_l = 40;
+        time_l = 50;
         break;
     }
     return time_l;

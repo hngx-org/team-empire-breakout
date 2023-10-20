@@ -136,7 +136,7 @@ class Ball extends CircleComponent
       updateBallTrajectory(collisionPoint, screenHitBox);
     }
 
-    if (other is DeadZone) {
+    if (other is DeadZone || timeInstance.value == 0) {
       gameRef.gameState = GameState.lost;
       timeInstance.cancelTimer();
       final deadZoneBoxRect = other.toAbsoluteRect();

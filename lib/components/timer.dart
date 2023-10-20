@@ -86,6 +86,7 @@ class TimeNotifier extends ValueNotifier<int> {
       value = _remainingTime;
     } else {
       timer.cancel();
+      gameState = GameState.lost;
     }
   }
 
