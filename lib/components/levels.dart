@@ -125,7 +125,7 @@ class Level {
       case 5:
         ball = 2;
       case 6:
-        ball = 3;
+        ball = 2;
         break;
     }
     return ball;

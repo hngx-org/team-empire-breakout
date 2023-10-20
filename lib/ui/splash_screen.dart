@@ -34,21 +34,21 @@ class _SplashPageState extends State<SplashPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                'assets/images/breakout4.webp'), // Replace with your image path
+                'assets/images/bb.jpeg'), // Replace with your image path
             fit: BoxFit.fill,
           ),
         ),
         child: Column(
           children: [
             SizedBox(height: 150),
-            // Text('Breakout (atari)',
-            //     style: TextStyle(
-            //         fontFamily: 'Pacifico', fontSize: 50, color: Colors.red)),
+            Text('Breakout (atari)',
+                style: TextStyle(
+                    fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
             SizedBox(height: 20),
-            // Text('Game',
-            //     style: TextStyle(
-            //         fontFamily: 'Pacifico', fontSize: 50, color: Colors.red)),
-            SizedBox(height: 600),
+            Text('Game',
+                style: TextStyle(
+                    fontFamily: 'Pacifico', fontSize: 50, color: Colors.white)),
+            SizedBox(height: 300),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(

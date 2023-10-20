@@ -39,7 +39,7 @@ class _LinearProgressWidgetState extends State<LinearProgressWidget> with Ticker
               return LinearProgressIndicator(
                 value: _animation.value, // Current progress value
                 backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
               );
             },
           ),
